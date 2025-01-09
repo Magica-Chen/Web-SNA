@@ -1,0 +1,83 @@
+---
+title: "Web and Social Network Analytics"
+subtitle: "Week 1: Web Analytics"
+author:
+  - name: Dr. Zexun Chen
+    orcid: 0000-0001-7883-8573
+    email: Zexun.Chen@ed.ac.uk
+format:
+  revealjs:
+    theme: serif
+    logo: logo/UoE_Centred Logo_CMYK_v1_160215.png
+    css: customised.css
+    slide-number: true
+    transition: slide
+    background-transition: fade
+    reveal-options:
+      controls: true
+      progress: true
+      center: true
+      transition: "slide"
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+jupyter: python3
+# date: false  # Disable the default date
+execute:
+  echo: true
+  eval: true
+  freeze: auto
+# bibliography: references.bib
+# output-file: week1.html
+# highlight-style: tango
+---
+
+# Overview
+
+-   Introduction to Web Analytics
+-   Evolution of Web
+-   Tools and Techniques for Analysis
+
+------------------------------------------------------------------------
+
+# Evolution of Web
+
+**Web 1.0 (Static Web)** - Early websites with static content - Limited interaction
+
+**Web 2.0 (Dynamic and Social Web)** - User-generated content - Social networking sites (e.g., Facebook, Twitter)
+
+**Web 3.0 (Semantic Web)** - Machine-readable content - Focus on data interoperability
+
+------------------------------------------------------------------------
+
+# Why Web Analytics?
+
+-   Understand user behavior
+-   Improve website performance
+-   Enhance user engagement
+
+------------------------------------------------------------------------
+
+# Tools for Web Analytics
+
+-   **Google Analytics**: Track website traffic
+-   **Python Libraries**: Requests, BeautifulSoup, Pandas
+-   **APIs**: Access data programmatically
+
+------------------------------------------------------------------------
+
+# Practical Tasks
+
+**Task 1**: Analyze website traffic using Google Analytics
+
+**Task 2**: Extract website data using Python (BeautifulSoup)
+
+**Task 3**: Build a simple web crawler
+
+------------------------------------------------------------------------
+
+# Summary
+
+-   Web analytics is essential for understanding online behavior
+-   Tools like Google Analytics and Python libraries can help in data collection and analysis
+-   Practical tasks reinforce learning through hands-on experience
