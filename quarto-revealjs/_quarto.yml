@@ -1,0 +1,14 @@
+project:
+  type: default
+  output-dir: ../temp
+
+extensions:
+  - grantmcdermott
+  - martinomagnifico
+
+format:
+  revealjs:
+    logo: logo/UoE_Centred Logo_CMYK_v1_160215.png
+    css: customised.css
+    
+bibliography: refs.bib
