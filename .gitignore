@@ -39,4 +39,5 @@ Thumbs.db
 # checkpoints
 *.ipynb_checkpoints
 /.quarto/
+/_site/
 .Rproj.user
