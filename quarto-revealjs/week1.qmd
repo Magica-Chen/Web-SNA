@@ -15,8 +15,7 @@ format:
     transition: slide
     background-transition: fade
     section-divs: false
-    chalkboard: false
-    menu: false
+    chalkboard: true
     reveal-options:
       controls: true
       progress: true
@@ -27,9 +26,9 @@ format:
       barhtml:
         header: "<div class='menubar'><ul class='menu'></ul></div>"
       scale: 0.5
-    html:
-      embed-resources: true
-      self-contained-math: true
+    # html:
+    #   embed-resources: true
+    #   self-contained-math: true
     output-file: index.html
 
 revealjs-plugins:
