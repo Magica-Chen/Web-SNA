@@ -11,25 +11,30 @@ format:
     theme: sky
     title-slide-attributes:
         data-state: "hide-menubar"
-    simplemenu:
-      flat: true
-      barhtml:
-        header: "<div class='menubar'><ul class='menu'></ul></div>"
-      scale: 0.5
     slide-number: true
     transition: slide
     background-transition: fade
     section-divs: false
-    chalkboard: true
+    chalkboard: false
+    menu: false
     reveal-options:
       controls: true
       progress: true
       center: true
       transition: "slide"
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><ul class='menu'></ul></div>"
+      scale: 0.5
     html:
       embed-resources: true
       self-contained-math: true
     output-file: index.html
+
+revealjs-plugins:
+  - simplemenu
+  
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
@@ -41,8 +46,7 @@ execute:
   eval: true
   # freeze: auto
 highlight-style: tango
-# revealjs-plugins:
-#   - simplemenu
+
 # toc: true
 
 ---
