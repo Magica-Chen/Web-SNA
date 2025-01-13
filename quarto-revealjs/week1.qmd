@@ -15,7 +15,8 @@ format:
     transition: slide
     background-transition: fade
     section-divs: false
-    chalkboard: true
+    chalkboard: false
+    menu: false
     reveal-options:
       controls: true
       progress: true
