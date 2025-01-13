@@ -41,6 +41,8 @@ execute:
   eval: true
   # freeze: auto
 highlight-style: tango
+revealjs-plugins:
+  - simplemenu
 # toc: true
 
 ---
