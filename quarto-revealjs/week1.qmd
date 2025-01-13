@@ -26,9 +26,9 @@ format:
       barhtml:
         header: "<div class='menubar'><ul class='menu'></ul></div>"
       scale: 0.5
-    # html:
-    #   embed-resources: true
-    #   self-contained-math: true
+    html:
+      embed-resources: true
+      self-contained-math: true
     output-file: index.html
 
 revealjs-plugins:
