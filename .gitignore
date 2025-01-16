@@ -41,3 +41,4 @@ Thumbs.db
 /.quarto/
 /_site/
 .Rproj.user
+*.virtual_documents
