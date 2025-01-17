@@ -1,0 +1,13 @@
+.reveal .slide-logo {
+  height: 8% !important;
+  width: auto !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.slide-number, .reveal.has-logo .slide-number {
+  bottom: 14px !important;
+  left: 48.5% !important;
+  top: unset !important;
+}
+
