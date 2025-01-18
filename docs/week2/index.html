@@ -29,71 +29,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="week2_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="customised.css">
@@ -417,7 +352,7 @@ Dr.&nbsp;Zexun Chen <a href="https://orcid.org/0000-0001-7883-8573" class="quart
 <ul>
 </ul></ul></section>
 <section>
-<section id="search-engines" class="title-slide slide level1 center" data-stack-name="History">
+<section id="search-engines" class="title-slide slide level1 center" data-stack-name="Search Engines">
 <h1>Search Engines</h1>
 
 </section>
@@ -433,109 +368,786 @@ Dr.&nbsp;Zexun Chen <a href="https://orcid.org/0000-0001-7883-8573" class="quart
 </div>
 </div>
 </section>
-<section id="section" class="slide level2 center">
-<h2></h2>
-<p>Sometimes viewers don’t understand the whole concept of vertical navigation for nested slides.</p>
-<p>A solution would be to limit your presentation to horizontal slides only, but you might still want to use ‘chapters’ with several slides.</p>
+<section id="google-search-in-2024" class="slide level2 center">
+<h2>Google Search in 2024</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/61JHONRXhjs" width="1000" height="700" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 </section>
-<section id="section-1" class="slide level2 center">
-<h2></h2>
-<p>Simplemenu has a solution for that. Make your presentation in a flat structure (no nested sections) and turn the <code>flat</code> option to <code>true</code>. Then, if a data-name is set for a slide, any following slides will keep that menu name.</p>
-<p class="small">
-</p><p>Of course, you can set it to stop inheriting the name as well.</p>
-<p></p>
-</section>
-<section id="set-it-up" class="slide level2 center" data-name="Set it up">
-<h2>Set it up</h2>
-</section>
-<section class="slide level2 center">
-
-<h3 id="edit-the-yaml">Edit the YAML</h3>
-<p>Set the flat option to <code>true</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href=""></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href=""></a><span class="at">  </span><span class="fu">revealjs</span><span class="kw">:</span></span>
-<span id="cb1-3"><a href=""></a><span class="at">    ...</span></span>
-<span id="cb1-4"><a href=""></a><span class="at">    </span><span class="fu">simplemenu</span><span class="kw">:</span></span>
-<span id="cb1-5"><a href=""></a><span class="at">      </span><span class="fu">flat</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2 center">
-
-<h3 id="html-markup">HTML Markup</h3>
-<p>Build your presentation in a flat way (no nested slides). Then give your sections a <code>data-name</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a><span class="fu">## Chapter one {data-name="Chapter 1"}</span></span>
-<span id="cb2-2"><a href=""></a><span class="co">&lt;!-- The 'Chapter 1' menu-item will be active for this slide --&gt;</span></span>
-<span id="cb2-3"><a href=""></a>Lorem ipsum sit dolor amet</span>
-<span id="cb2-4"><a href=""></a></span>
-<span id="cb2-5"><a href=""></a><span class="fu">## Another slide </span></span>
-<span id="cb2-6"><a href=""></a><span class="co">&lt;!-- The 'Chapter 1' menu-item will be active for this slide --&gt;</span></span>
-<span id="cb2-7"><a href=""></a>Lorem ipsum sit dolor amet</span>
-<span id="cb2-8"><a href=""></a></span>
-<span id="cb2-9"><a href=""></a><span class="fu">## Chapter two {data-name="Chapter 2"}</span></span>
-<span id="cb2-10"><a href=""></a><span class="co">&lt;!-- The 'Chapter 2' menu-item will be active for this slide --&gt;</span></span>
-<span id="cb2-11"><a href=""></a>Lorem ipsum sit dolor amet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2 center">
-
-<h3 id="section-2"></h3>
-<p>To avoid Quarto creating nested sections, set <code>section-divs: false</code> and use dividers to separate your slides.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href=""></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href=""></a><span class="at">  </span><span class="fu">revealjs</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href=""></a><span class="at">    </span><span class="fu">section-divs</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href=""></a><span class="fu">## Chapter one {data-name="Chapter 1"}</span></span>
-<span id="cb4-2"><a href=""></a><span class="co">&lt;!-- The 'Chapter 1' menu-item will be active for this slide --&gt;</span></span>
-<span id="cb4-3"><a href=""></a>Lorem ipsum sit dolor amet</span>
-<span id="cb4-4"><a href=""></a></span>
-<span id="cb4-5"><a href=""></a>---</span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a><span class="fu">### Another slide </span></span>
-<span id="cb4-8"><a href=""></a><span class="co">&lt;!-- The 'Chapter 1' menu-item will be active for this slide --&gt;</span></span>
-<span id="cb4-9"><a href=""></a>Lorem ipsum sit dolor amet</span>
-<span id="cb4-10"><a href=""></a></span>
-<span id="cb4-11"><a href=""></a>---</span>
-<span id="cb4-12"><a href=""></a></span>
-<span id="cb4-13"><a href=""></a><span class="fu">## Chapter two {data-name="Chapter 2"}</span></span>
-<span id="cb4-14"><a href=""></a><span class="co">&lt;!-- The 'Chapter 2' menu-item will be active for this slide --&gt;</span></span>
-<span id="cb4-15"><a href=""></a>Lorem ipsum sit dolor amet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2 center">
-
-<h3 id="section-3"></h3>
-<p>Any slides following a slide with a data-name will keep that menu name.</p>
-</section>
-<section id="section-4" class="slide level2 center" data-sm="false">
-<h2></h2>
-<p>To stop inheriting the previous slide menu name, start a new named section, or add <code>data-sm="false"</code> to your slide.</p>
-</section></section>
-<section>
-<section id="web-analytics" class="title-slide slide level1 center" data-stack-name="Analytics">
-<h1>Web Analytics</h1>
-
-</section>
-<section id="analytics-from-web" class="slide level2 center">
-<h2>Analytics from Web</h2>
+<section id="search-engines-1" class="slide level2 center">
+<h2>Search Engines</h2>
+<div style="font-size: 70%;">
 <ul>
-<li>Understand of the usage of website through measuring &amp; analysing the data generated by its users</li>
-<li>A variety of analytics tools speed this process up:
+<li class="fragment">Make the web navigational to the World Wide Web
 <ul>
-<li><strong>Google Analytics</strong></li>
-<li><strong>Commercial:</strong> <a href="https://www.leadfeeder.com/blog/google-analytics-alternatives/">Woopra, Mixpanel, Leadfeeder</a></li>
-<li><strong>Open-source:</strong> <a href="https://opensource.com/article/18/1/top-5-open-source-analytics-tools">Matomo, Open Web Analytics</a></li>
+<li class="fragment">Examples: Google, Yahoo, Bing, Baidu, Yandex, DuckDuckGO</li>
+<li class="fragment">AI-Powered Search Enginies, e.g., <a href="https://www.perplexity.ai/">perplexity</a></li>
+<li class="fragment">Searches the Deep Web/Dark Web as well:
+<ul>
+<li class="fragment">Part of the web that is not <strong>indexed</strong> by well-known search engines</li>
+<li class="fragment">Typically hidden behind paywalls, scripts, etc.</li>
+<li class="fragment">Dark web: websites that can only be reached by encryption-enabled browsers, e.g., Tor (The Onion Router)</li>
+</ul></li>
+<li class="fragment">Privacy-oriented search engines, e.g., DuckDuckGo, TorSearch (indexes pages to help find content in websites located on the Tor network), etc.</li>
+<li class="fragment">Search Engine is <strong>NOT</strong> the same as Web Browser:
+<ul>
+<li class="fragment">Search Engine: Google, DuckDuckGo, TorSearch, Bing</li>
+<li class="fragment">Web Browser: Chrome (default engine: Google), DuckDuckGo Browser (default engine: DuckDuckGo), Tor Browser (default engine: DuckDuckGo), Edge (default engine: Bing)</li>
+</ul></li>
 </ul></li>
 </ul>
+</div>
+</section></section>
+<section>
+<section id="web-search-basics" class="title-slide slide level1 center" data-stack-name="Search Basics">
+<h1>Web Search Basics</h1>
+
 </section>
-<section id="thats-it" class="slide level2 center">
-<h2>That’s it!</h2>
+<section id="architecture" class="slide level2 center">
+<h2>Architecture</h2>
+<div style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/architecture-basics.PNG"></p>
+<figcaption>The basic architecture of a search engine</figcaption>
+</figure>
+</div>
+</div>
 </section>
-<section id="more-demos" class="slide level2 center" data-name="More demos">
-<h2>More demos</h2>
-<p>For more demos go to the <a href="https://github.com/Martinomagnifico/reveal.js-simplemenu">Simplemenu plugin</a> for Reveal.js. Not all of the options in the regular plugin are available in the Quarto plugin.</p>
+<section id="key-components" class="slide level2 center">
+<h2>Key Components</h2>
+<div style="font-size: 100%;">
+<ul>
+<li class="fragment"><strong>Web Crawlers:</strong> Automated scripts that browse the internet to collect data.</li>
+<li class="fragment"><strong>Indexer:</strong> Processes and stores information gathered by crawlers.</li>
+<li class="fragment"><strong>Search Algorithm:</strong> Determines the relevance and ranking of results.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="how-google-search-works">How Google Search Works</h3>
+<iframe data-external="1" src="https://www.youtube.com/embed/0eKVizvYSUQ" width="1000" height="700" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="principles" class="slide level2 center">
+<h2>Principles</h2>
+<div style="font-size: 100%;">
+<ul>
+<li class="fragment"><strong>Finding:</strong> To “crawl” all of the links on the web.</li>
+<li class="fragment"><strong>Organizing:</strong> To index all of these links into their database.</li>
+<li class="fragment"><strong>Serving:</strong> To rank these links.</li>
+</ul>
+</div>
+</section>
+<section id="comparison" class="slide level2 center">
+<h2>Comparison</h2>
+<div style="font-size: 55%;">
+<ul>
+<li class="fragment">How to compare search engines technically?
+<ul>
+<li class="fragment"><strong>Estimates of fractions of the web indexed:</strong>
+<ul>
+<li class="fragment">Independently estimated by picking random documents from one index.</li>
+</ul></li>
+<li class="fragment"><strong>Randomly sample each other:</strong>
+<ul>
+<li class="fragment"><span class="math inline">\(|E_i|\)</span>: Number of indexed pages for engine <span class="math inline">\(i \in [1,2]\)</span>.</li>
+<li class="fragment">Proportion of indices from <span class="math inline">\(E_1\)</span> available <span class="math inline">\(E_2 \mapsto x\)</span>.</li>
+<li class="fragment">Proportion of indices from <span class="math inline">\(E_2\)</span> available <span class="math inline">\(E_1 \mapsto y\)</span>.</li>
+<li class="fragment">Check whether <span class="math inline">\(\frac{|E_1|}{|E_2|} \approx \frac{y}{x}\)</span>.</li>
+</ul></li>
+<li class="fragment"><strong>Random tests:</strong>
+<ul>
+<li class="fragment">Random search: Bias towards what is queried.</li>
+<li class="fragment">Random IP address: Bias towards shared, grouped IPs.</li>
+<li class="fragment">Random walks: Web is not strongly connected; this is expensive.</li>
+</ul></li>
+</ul></li>
+<li class="fragment"><strong>Other difficulties:</strong>
+<ul>
+<li class="fragment"><strong>Term spam:</strong> Adding words that are unrelated to the site.</li>
+<li class="fragment"><strong>Duplicates:</strong> (~40% of the web).</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="shingling-for-duplicates">Shingling for Duplicates</h3>
+<div class="columns">
+<div class="column" style="font-size: 55%;">
+<ul>
+<li>Compare and determine how similar.</li>
+<li>Document comparison.</li>
+<li>Plagiarism detection.</li>
+</ul>
+<div style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/Shingling.PNG" style="width:70.0%"></p>
+<figcaption>Shingling</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="font-size: 55%;">
+<ul>
+<li><strong>Shingle:</strong> String of length <span class="math inline">\(k\)</span> in a document <span class="math inline">\(d\)</span>.
+<ul>
+<li>Example: <span class="math inline">\(k = 5\)</span> in “University of Edinburgh.”</li>
+<li>Shingles: “Unive”, “niver”, …, “burgh.”</li>
+<li><span class="math inline">\(k\)</span> typically not too small to avoid overlap in documents.</li>
+</ul></li>
+<li><strong>Degree of overlap between two documents:</strong>
+<ul>
+<li><span class="math inline">\(S(d_j)\)</span>: The shingles in <span class="math inline">\(d_j\)</span>.</li>
+<li>Jaccard index (intersection over union): <span class="math display">\[
+J(S(d_1), S(d_2)) = \frac{|S(d_1)\cap S(d_2)|}{|S(d_1) \cup S(d_2)|}
+\]</span></li>
+<li>If threshold exceeded: regarded as similar.
+<ul>
+<li>Apply hashing to document’s shingles.</li>
+<li>Information on shingles.</li>
+</ul></li>
+</ul></li>
+<li><strong>Challenges:</strong>
+<ul>
+<li>High computational resources for large documents or web pages.</li>
+<li>Optimal size of shingles.</li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section id="shingling" class="slide level2 center">
+<h2>Shingling</h2>
+<div style="font-size: 80%;">
+<ul>
+<li class="fragment">A <strong>k-shingle</strong> is a consecutive set of <span class="math inline">\(k\)</span> words. For example: <span class="math display">\[
+D_1 = \text{"I am Zexun"}, \quad D_2 = \text{"Zexun I am"}.
+\]</span>
+<ul>
+<li class="fragment">The (k=1)-shingles of <span class="math inline">\(D_1 \cup D_2\)</span> = { “I”, “am”, “Zexun” }.</li>
+<li class="fragment">The (k=2)-shingles of <span class="math inline">\(D_1 \cup D_2\)</span> = { “I am”, “am Zexun”, “Zexun I” }.</li>
+</ul></li>
+<li class="fragment">Let’s look at (k=2)-shingles for each <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span>: <span class="math display">\[
+D_1 : \text{"I am", "am Zexun"} \quad D_2 : \text{"Zexun I", "I am"}
+\]</span></li>
+<li class="fragment">Therefore, the Jaccard index: <span class="math display">\[
+JS(D_1, D_2) = \frac{1}{3}
+\]</span></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="web-crawlers" class="title-slide slide level1 center" data-stack-name="Web Crawlers">
+<h1>Web Crawlers</h1>
+
+</section>
+<section id="basics" class="slide level2 center">
+<h2>Basics</h2>
+<div title="Web Crawler" style="font-size: 70%;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Web Crawler</strong></p>
+</div>
+<div class="callout-content">
+<p>It aims to quickly and efficiently gather as many useful web pages as possible. Also called <strong>spiders</strong>, <strong>bots</strong>, or <strong>web robots</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="column">
+<div style="font-size: 65%;">
+<ol type="1">
+<li class="fragment"><strong>Starting Point:</strong> Begin with a list of web addresses (URLs).</li>
+<li class="fragment"><strong>Crawling:</strong> Visit each URL and read the content of the page.</li>
+<li class="fragment"><strong>Extracting Links:</strong> Identify all hyperlinks on the page and add them to the list of URLs to visit.</li>
+<li class="fragment"><strong>Repeating the Process:</strong> Continue crawling these new URLs.</li>
+<li class="fragment"><strong>Respecting Rules:</strong> Adhere to <code>robots.txt</code> files and meta tags.</li>
+</ol>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/web-crawler.png" style="width:65.0%"></p>
+<figcaption>Web Crawler</figcaption>
+</figure>
+</div>
+</div></section>
+<section id="web-crawling-vs-web-scraping" class="slide level2 center">
+<h2>Web Crawling vs Web Scraping</h2>
+<div style="font-size: 70%;">
+<ul>
+<li>Both are techniques used for extracting data from the web.</li>
+<li><strong>Web Crawling:</strong> Focuses on navigating the web and indexing content.</li>
+<li><strong>Web Scraping:</strong> Involves extracting specific data from web pages.</li>
+</ul>
+</div>
+<div style="text-align:center; font-size: 70%;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 35%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Aspect</strong></th>
+<th><strong>Web Crawling</strong></th>
+<th><strong>Web Scraping</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Indexing web content</td>
+<td>Extracting specific data</td>
+</tr>
+<tr class="even">
+<td><strong>Process</strong></td>
+<td>Navigating and mapping</td>
+<td>Parsing HTML for data</td>
+</tr>
+<tr class="odd">
+<td><strong>Usage</strong></td>
+<td>Search engines</td>
+<td>Data analysis, research</td>
+</tr>
+<tr class="even">
+<td><strong>Data</strong></td>
+<td>Metadata, links</td>
+<td>Targeted data, text</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></section>
+<section>
+<section id="indexing-and-storing-data" class="title-slide slide level1 center" data-stack-name="Index&amp;Store">
+<h1>Indexing and Storing Data</h1>
+
+</section>
+<section id="steps" class="slide level2 center">
+<h2>Steps</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="step-1-indexing">Step 1: Indexing</h3>
+<div style="font-size: 80%;">
+<ul>
+<li class="fragment">Indexing is the process of organizing data in a way that makes it efficiently retrievable.</li>
+<li class="fragment">Key to the functioning of search engines and large databases.</li>
+<li class="fragment">Involves creating references to data for quick access.</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="step-2-storing">Step 2: Storing</h3>
+<div style="font-size: 80%;">
+<ul>
+<li class="fragment">Data storage involves saving indexed data in a structured format.</li>
+<li class="fragment">Includes databases, data warehouses, and cloud storage.</li>
+<li class="fragment">Ensures data security, integrity, and availability.</li>
+</ul>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="algorithms" class="title-slide slide level1 center" data-stack-name="Algorithms">
+<h1>Algorithms</h1>
+
+</section>
+<section id="searching-and-presentation" class="slide level2 center">
+<h2>Searching and Presentation</h2>
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment"><strong>Key Role:</strong> To rank web pages based on relevance and authority.
+<ul>
+<li class="fragment"><strong>Keyword Analysis:</strong> The primary step in understanding the query intent.</li>
+<li class="fragment"><strong>PageRank:</strong> Google’s initial algorithm based on <strong>Link Analysis</strong>.</li>
+<li class="fragment"><strong>Current Trends:</strong> Incorporation of AI and machine learning for context understanding.</li>
+</ul></li>
+<li class="fragment"><strong>Relevance in Search Results:</strong>
+<ul>
+<li class="fragment">Defining relevance: Matching user queries with accurate and useful information.</li>
+<li class="fragment">Factors influencing relevance: Keywords, site authority, content quality, user engagement metrics.</li>
+<li class="fragment">The challenge of subjectivity in relevance.</li>
+</ul></li>
+<li class="fragment"><strong>Personalization:</strong>
+<ul>
+<li class="fragment">Same search, but different results based on user context.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="link-analysis" class="slide level2 center">
+<h2>Link Analysis</h2>
+<div class="columns">
+<div class="column" style="font-size: 65%;">
+<ul>
+<li class="fragment"><strong>Based on the principle of referral:</strong>
+<ul>
+<li class="fragment">Relies on the relevance and quality of web pages.</li>
+<li class="fragment">Quantifies the influence of a web page by the number of referrals.</li>
+<li class="fragment">Acts as evidence for authority.</li>
+</ul></li>
+<li class="fragment"><strong>Potential Abuse:</strong>
+<ul>
+<li class="fragment">Link spam by setting up many referring websites.</li>
+</ul></li>
+<li class="fragment"><strong>Sets the web up as a graph:</strong>
+<ul>
+<li class="fragment"><strong>Nodes (vertices):</strong> Web pages.</li>
+<li class="fragment"><strong>Edges (links):</strong> Hyperlinks between pages.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/Link-Graph.PNG" style="width:80.0%"></p>
+<figcaption>Link Graph</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="markov-chains-definition" class="slide level2 center">
+<h2>Markov Chains: Definition</h2>
+<div style="font-size: 70%;">
+<p>A Markov chain (or process) is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
+</div>
+<div class="columns">
+<div class="column">
+<p>Key Concepts</p>
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment">In each step, a random choice is made.</li>
+<li class="fragment">Consists of <span class="math inline">\(N\)</span> states (e.g., each web page).</li>
+<li class="fragment"><span class="math inline">\(N \times N\)</span> transition probability matrix <span class="math inline">\(P\)</span>:
+<ul>
+<li class="fragment">Each row of <span class="math inline">\(P\)</span> adds up to 1.</li>
+<li class="fragment"><span class="math inline">\(P_{ij}\)</span> tells the probability that the next state is <span class="math inline">\(j\)</span> when in state <span class="math inline">\(i\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/markov-chain.png" style="width:100.0%"></p>
+<figcaption>Markov Chain</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="markov-chains-surfers-position" class="slide level2 center">
+<h2>Markov Chains: Surfer’s Position</h2>
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment">At time <span class="math inline">\(t\)</span>, the probability vector is <span class="math inline">\(x_0 P\)</span>: <span class="math display">\[
+(x_0 P) P = x_0 P^2
+\]</span></li>
+<li class="fragment">Converges to a steady-state distribution.</li>
+<li class="fragment">Each entry of <span class="math inline">\(P\)</span> only depends on the current state.</li>
+</ul>
+</div>
+<div style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/markov-chain-2.png"></p>
+<figcaption>Markov Chain Steady-State</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="markov-chains-adjacency-matrix" class="slide level2 center">
+<h2>Markov Chains: Adjacency Matrix</h2>
+<div style="font-size: 65%;">
+<p>A random surfer’s behavior on the web graph can be modeled with an <strong>adjacency matrix</strong>: <span class="math display">\[
+  A = (a_{ij}) = \text{Number of edges from vertex $i$ to $j$}.
+  \]</span></p>
+</div>
+<div class="columns">
+<div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/adj-matrix-A.PNG"></p>
+<figcaption>Adjacency Matrix</figcaption>
+</figure>
+</div>
+</div><div class="column">
+<div style="font-size: 65%;">
+<ul>
+<li class="fragment"><strong>Dead Ends:</strong>
+<ul>
+<li class="fragment">No outlinks; rows in <span class="math inline">\(A\)</span> sum to 0.</li>
+<li class="fragment">After a few iterations, entries in <span class="math inline">\(x\)</span> become 0.</li>
+</ul></li>
+<li class="fragment"><strong>Solutions:</strong>
+<ul>
+<li class="fragment">Drop dead ends (cascading effect).</li>
+<li class="fragment">Add “teleportation” links:
+<ul>
+<li class="fragment">Randomly jump to another page with probability <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>.:::</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="markov-chains-adjacency-matrix-1" class="slide level2 center">
+<h2>Markov Chains: Adjacency Matrix</h2>
+<div style="font-size: 100%;">
+<ul>
+<li class="fragment">Transform <span class="math inline">\(A\)</span> to <span class="math inline">\(P\)</span>:
+<ol type="1">
+<li class="fragment">Divide each 1 by the number of ones in the row.</li>
+<li class="fragment">If a row has no 1s, replace by <span class="math inline">\(1/N\)</span>.</li>
+<li class="fragment">Multiply the matrix by <span class="math inline">\(1 - \alpha\)</span>.</li>
+<li class="fragment">Add <span class="math inline">\(\alpha / N\)</span> to every entry.</li>
+</ol></li>
+</ul>
+</div>
+</section>
+<section id="markov-chains-example-1" class="slide level2 center">
+<h2>Markov Chains: Example 1</h2>
+<div class="columns">
+<div class="column">
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment">Converting this web graph from an adjacency matrix to a transition matrix for <span class="math inline">\(\alpha = 0.3\)</span>: <span class="math display">\[
+A = \begin{pmatrix}
+1 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0
+\end{pmatrix}
+\]</span></li>
+<li class="fragment">Transition matrix accounts for teleportation probability.</li>
+</ul>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/alpha03.PNG"></p>
+<figcaption>Transition Matrix for α=0.3</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="markov-chains-example-2" class="slide level2 center">
+<h2>Markov Chains: Example 2</h2>
+<div class="columns">
+<div class="column">
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment">Converting this web graph from an adjacency matrix to a transition matrix for <span class="math inline">\(\alpha = 0.7\)</span>: <span class="math display">\[
+A = \begin{pmatrix}
+1 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 0\\
+1 &amp; 1 &amp; 1
+\end{pmatrix}
+\]</span></li>
+<li class="fragment">Transition matrix includes teleportation adjustments with a higher <span class="math inline">\(\alpha\)</span> value.</li>
+</ul>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/alpha06.PNG"></p>
+<figcaption>Transition Matrix for α=0.7</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="pagerank-algorithm-overview" class="slide level2 center">
+<h2>PageRank: Algorithm Overview</h2>
+<div style="font-size: 85%;">
+<ul>
+<li class="fragment">Basic algorithm underlying Google’s search engine.</li>
+<li class="fragment">Named after Larry Page (Co-founder of Google).</li>
+<li class="fragment">A general approach for scoring nodes in a network.</li>
+</ul>
+</div>
+<div style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/PageRank.jpg" style="width:50.0%"></p>
+<figcaption>PageRank</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="pagerank-principles" class="slide level2 center">
+<h2>PageRank: Principles</h2>
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment">At each time step, the surfer makes a decision.</li>
+<li class="fragment">In the long run, some pages are visited more often than others.</li>
+<li class="fragment">Challenges:
+<ul>
+<li class="fragment">What if there are no out-links?
+<ul>
+<li class="fragment">Add teleportation modeled as <span class="math inline">\(1/N\)</span>.</li>
+<li class="fragment">Each node receives teleport probability <span class="math inline">\(\alpha\)</span>.</li>
+</ul></li>
+</ul></li>
+<li class="fragment"><span class="math inline">\(\pi(\nu)\)</span> (PageRank score) combines:
+<ul>
+<li class="fragment"><strong>Random Walk:</strong> Reflects the structure of the web graph.</li>
+<li class="fragment"><strong>Teleportation:</strong> Controlled by <span class="math inline">\(\alpha\)</span>.</li>
+</ul></li>
+<li class="fragment">Assumption: Important websites receive more links from other websites.</li>
+</ul>
+</div>
+</section>
+<section id="pagerank-computation" class="slide level2 center">
+<h2>PageRank Computation</h2>
+<div class="columns">
+<div class="column">
+<div style="font-size: 65%;">
+<ul>
+<li class="fragment">Left eigenvectors of <span class="math inline">\(P\)</span> are vectors <span class="math inline">\(\pi\)</span> of size <span class="math inline">\(N\)</span>:
+<ul>
+<li class="fragment"><span class="math inline">\(\pi P = \lambda \pi\)</span>, where <span class="math inline">\(\lambda\)</span> are the eigenvalues of <span class="math inline">\(P\)</span>.</li>
+<li class="fragment">If <span class="math inline">\(\pi\)</span> is the steady-state distribution: <span class="math display">\[
+\pi P = 1 \pi
+\]</span></li>
+<li class="fragment">Compute left eigenvector of <span class="math inline">\(P\)</span> for eigenvalue 1 to obtain PageRank values <span class="math inline">\(\pi\)</span>.</li>
+</ul></li>
+<li class="fragment">Calculated through <strong>power iteration</strong>:
+<ol type="1">
+<li class="fragment">Start with an initial distribution <span class="math inline">\(x\)</span>.</li>
+<li class="fragment">Find <span class="math inline">\(xP^t\)</span> for large <span class="math inline">\(t\)</span>, as frequencies converge.</li>
+<li class="fragment">Simulates a user’s surfing behavior.</li>
+</ol></li>
+</ul>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/PageRank-2.PNG" style="width:100.0%"></p>
+<figcaption>PageRank Illustration</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="pagerank-computation-exercise" class="slide level2 center">
+<h2>PageRank Computation: Exercise</h2>
+<div class="columns">
+<div class="column">
+<h3 id="question">Question</h3>
+<div style="font-size: 65%;">
+<ul>
+<li>Find the “coolest page” if <span class="math inline">\(x_0 = (1 \, 0 \, 0)\)</span> over 3 iterations: <span class="math display">\[
+P = \begin{pmatrix}
+0.45 &amp; 0.1 &amp; 0.45\\
+0.33 &amp; 0.33 &amp; 0.33\\
+0.1 &amp; 0.8 &amp; 0.1
+\end{pmatrix}
+\]</span></li>
+</ul>
+</div>
+<div style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/PageRank-4.PNG" style="width:75.0%"></p>
+<figcaption>Question Graph</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="text-align:center;">
+<h3 id="solution">Solution</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/PageRank-5.PNG" style="width:90.0%"></p>
+<figcaption>Solution Graph</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="topic-specific-pagerank" class="slide level2 center">
+<h2>Topic-Specific PageRank</h2>
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment"><strong>Query-Independent Measure:</strong>
+<ul>
+<li class="fragment">Query results are based on PageRank.</li>
+<li class="fragment">Relative ordering depends on the query and the PageRank score.</li>
+</ul></li>
+<li class="fragment"><strong>Topic-Specific PageRank:</strong>
+<ul>
+<li class="fragment">Teleporting is not uniformly distributed.</li>
+<li class="fragment">Example: A sports fanatic’s browsing preferences: <span class="math display">\[
+S: \text{Sports-related pages, with sports PageRank } \pi_S.
+\]</span>
+<ul>
+<li class="fragment">Entries in <span class="math inline">\(\pi_S\)</span> are zero for unrelated webpages.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="personalized-pagerank" class="slide level2 center">
+<h2>Personalized PageRank</h2>
+<div class="columns">
+<div class="column">
+<div style="font-size: 70%;">
+<ul>
+<li class="fragment">Linear combination of a small number of topic-specific distributions.</li>
+<li class="fragment">Example: <span class="math display">\[
+0.06 \pi_S + 0.04 \pi_P
+\]</span>
+<ul>
+<li class="fragment">For sports and politics browsing.</li>
+<li class="fragment">User has 10% teleport probability:
+<ul>
+<li class="fragment">6% sports teleport.</li>
+<li class="fragment">4% politics teleport.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/PageRank-6.PNG"></p>
+<figcaption>Personalized PageRank Graph</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="hubs-and-authorities" class="slide level2 center">
+<h2>Hubs and Authorities</h2>
+<div class="columns">
+<div class="column">
+<div style="font-size: 60%;">
+<ul>
+<li class="fragment"><strong>PageRank:</strong> Simplistic view of a network (one score per node).</li>
+<li class="fragment"><strong>Hubs and Authorities:</strong> Richer view of a network with different node types:
+<ul>
+<li class="fragment"><strong>Hub:</strong> A page that points to many others.</li>
+<li class="fragment"><strong>Authority:</strong> A page that many others refer to.</li>
+</ul></li>
+<li class="fragment"><strong>Reflecting Types of Websites:</strong>
+<ul>
+<li class="fragment">Broad-topic searches often land on authority pages:
+<ul>
+<li class="fragment">Example: Searching “leukaemia” leads to the National Cancer Institute’s page.</li>
+</ul></li>
+<li class="fragment">Hub pages point to authoritative pages:
+<ul>
+<li class="fragment">Example: Searching “sell property” leads to Rightmove.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="text-align:center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/hub_and_authority.png" style="width:95.0%"></p>
+<figcaption>Hubs and Authorities</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="hubs-and-authorities-calculations" class="slide level2 center">
+<h2>Hubs and Authorities: Calculations</h2>
+<div style="font-size: 60%;">
+<ul>
+<li class="fragment">For a web page/node <span class="math inline">\(\nu\)</span>:
+<ul>
+<li class="fragment"><span class="math inline">\(h(\nu)\)</span>: Hub score.</li>
+<li class="fragment"><span class="math inline">\(a(\nu)\)</span>: Authority score.</li>
+<li class="fragment">Initially: <span class="math inline">\(h(\nu) = a(\nu) = 1\)</span>.</li>
+<li class="fragment"><span class="math inline">\(\nu \mapsto y\)</span> if a link exists between <span class="math inline">\(\nu\)</span> and <span class="math inline">\(y\)</span>.</li>
+</ul></li>
+<li class="fragment">Iterative Calculations:
+<ul>
+<li class="fragment"><span class="math inline">\(h(\nu) \leftarrow \sum_{\nu \to y} a(y)\)</span>.</li>
+<li class="fragment"><span class="math inline">\(a(\nu) \leftarrow \sum_{y \to \nu} h(y)\)</span>.</li>
+<li class="fragment"><span class="math inline">\(\textbf{h} \leftarrow A \textbf{a}\)</span>, <span class="math inline">\(\textbf{a} \leftarrow A^T \textbf{h}\)</span> (adjacency matrix <span class="math inline">\(A\)</span>).</li>
+<li class="fragment"><span class="math inline">\(\textbf{h} \leftarrow AA^T \textbf{h}\)</span>, <span class="math inline">\(\textbf{a} \leftarrow A^T A \textbf{a}\)</span> with SVD.
+<ul>
+<li class="fragment"><span class="math inline">\(\lambda_h \textbf{h} = AA^T \textbf{h}\)</span>, <span class="math inline">\(\lambda_a \textbf{a} = A^T A \textbf{a}\)</span>.</li>
+<li class="fragment"><span class="math inline">\(\lambda_h, \lambda_a\)</span>: Eigenvalues of <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^T A\)</span> respectively.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="hits-algorithm" class="slide level2 center">
+<h2>HITS Algorithm</h2>
+<div style="font-size: 60%;">
+<ul>
+<li><strong>Hyperlink-Induced Topic Search (HITS)</strong>(Kleinberg, 1997):
+<ol type="1">
+<li>Assemble the target subset of web pages and then Compute <span class="math inline">\(AA^T\)</span> / <span class="math inline">\(A^T A\)</span>.</li>
+<li>Calculate eigenvectors to find <span class="math inline">\(\textbf{h}\)</span> and <span class="math inline">\(\textbf{a}\)</span>, Output the top-scoring hubs and authorities.</li>
+</ol></li>
+</ul>
+</div>
+<div style="text-align:center;font-size: 60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/hubs-authority.PNG" style="width:65.0%"></p>
+<figcaption>Note: Links containing the query “jaguar” receive double weighting.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="choosing-the-subset-of-the-web" class="slide level2 center">
+<h2>Choosing the Subset of the Web</h2>
+<div style="font-size: 60%;">
+<ul>
+<li class="fragment"><strong>Collection of Sites:</strong>
+<ul>
+<li class="fragment">Use a text index to get all related pages – root set.</li>
+<li class="fragment">Build base set: root set + referring pages.</li>
+<li class="fragment">Use the base set to compute hub and authority scores.</li>
+</ul></li>
+<li class="fragment"><strong>Authority Sites May Not Contain Keywords:</strong>
+<ul>
+<li class="fragment">Example: IBM for computer hardware.</li>
+<li class="fragment">Hubs are likely to include the terms.</li>
+</ul></li>
+<li class="fragment"><strong>HITS Algorithm:</strong>
+<ul>
+<li class="fragment">5 iterations on average are customary.</li>
+<li class="fragment">Downside: Inclusion of pages in a foreign language.
+<ul>
+<li class="fragment">Due to base set construction during which the query is ignored.</li>
+</ul></li>
+</ul></li>
+<li class="fragment"><strong>Importance:</strong>
+<ul>
+<li class="fragment">Enhances the quality of search results by identifying expert sources.</li>
+<li class="fragment">Used in combination with other algorithms like PageRank for comprehensive analysis.</li>
+<li class="fragment">Critical for academic and topic-specific searches.</li>
+</ul></li>
+</ul>
+</div>
+</section></section>
+<section id="take-home-messages" class="title-slide slide level1 center" data-name="Summary">
+<h1>Take Home Messages</h1>
+<div style="font-size: 80%;">
+<ul>
+<li class="fragment">Search Engines</li>
+<li class="fragment">Web Search Basics</li>
+<li class="fragment">Web Crawler</li>
+<li class="fragment">Indexing and Storing Data</li>
+<li class="fragment">Searching Algorithms:
+<ul>
+<li class="fragment">Link Analysis</li>
+<li class="fragment"><strong>Markov Chains</strong> (***)</li>
+<li class="fragment"><strong>PageRank</strong> (**)</li>
+<li class="fragment"><strong>Hubs and Authorities</strong> (**)</li>
+</ul></li>
+</ul>
+</div>
 <div class="quarto-auto-generated-content">
 <p><img src="logo/UoE_Centred Logo_CMYK_v1_160215.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -570,7 +1182,7 @@ Dr.&nbsp;Zexun Chen <a href="https://orcid.org/0000-0001-7883-8573" class="quart
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'simplemenu': {"menubarclass":"menubar","menuclass":"menu","activeclass":"active","activeelement":"li","flat":true,"barhtml":{"header":"<div class='menubar'><ul class='menu'></ul><div>","footer":""},"scale":0.5},
+'simplemenu': {"menubarclass":"menubar","menuclass":"menu","activeclass":"active","activeelement":"li","flat":true,"barhtml":{"header":"<div class='menubar'><ul class='menu'></ul></div>","footer":""},"scale":0.5},
 'smaller': false,
  
         // Display controls in the bottom right corner
