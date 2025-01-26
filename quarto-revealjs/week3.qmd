@@ -73,7 +73,7 @@ jupyter: python3
 
 ---
 
-::: {.incremental style="font-size: 75%;"}
+::: {.incremental style="font-size: 70%;"}
 - Two kinds of data:
   - **Linkage-based** for structural analysis:
     - Links are explicit, e.g., Facebook friendship
