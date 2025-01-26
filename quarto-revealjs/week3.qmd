@@ -627,7 +627,7 @@ Triadic closure is a concept in social network theory, first suggested by German
 
 ::: {.columns}
 
-::: {.column}
+::: {.column style="font-size: 70%;"}
 ![](fig/triadic-closure.PNG){width=85%}
 :::
 
