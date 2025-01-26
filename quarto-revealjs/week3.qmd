@@ -1,0 +1,1130 @@
+---
+title: "Web and Social Network Analytics"
+subtitle: "Week 3: Social Media & Graph Analytics"
+project: ../_quarto.yml
+author:
+  - name: Dr. Zexun Chen
+    orcid: 0000-0001-7883-8573
+    email: Zexun.Chen@ed.ac.uk
+format:
+  revealjs:
+    theme: sky
+    section-divs: false
+    title-slide-attributes:
+        data-state: "hide-menubar"
+    center: true
+    transition: slide
+    background-transition: fade
+    controls: true
+    slide-number: true
+    # controls-layout: bottom-right
+    chalkboard: true
+    menu: true
+    html:
+      embed-resources: true
+      self-contained-math: true
+    output-file: index.html
+    simplemenu:
+        flat: true
+        barhtml:
+            header: "<div class='menubar'><ul class='menu'></ul></div>"
+        scale: 0.5
+revealjs-plugins:
+  - simplemenu
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+date: "January 2025"
+date-format: "MMM-YYYY"  
+jupyter: python3
+
+---
+
+## Table of Contents {data-state="hide-menubar"}
+
+<ul class="menu"><ul>
+
+# Social Media {data-stack-name="Soical Media"}
+
+## Introduction
+
+::: {.columns}
+
+::: {.column}
+::: {.incremental style="font-size: 75%;"}
+- Last decade explosion of social media websites
+  - E.g., Twitter, LinkedIn, Facebook, Instagram
+- Creation of vast amount of content
+- Content is also linked
+  - Interpersonal/entity relations from graph
+    - Network of interactions
+  - Data linked to people
+    - Preferences, videos, images, sensor data
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/social-media-marketing.png){width=100%}
+:::
+
+:::
+
+---
+
+::: {.incremental style="font-size: 75%;"}
+- Two kinds of data:
+  - **Linkage-based** for structural analysis:
+    - Links are explicit, e.g., Facebook friendship
+    - Analyse linkage behaviour to determine important nodes, communities, links, ...
+  - **Content-based**:
+    - Not explicitly linked, but becomes more informative when combined with linkage data
+    - Often very rich: e-mails, blogs, message boards, reviews
+      - Linked through participants, customers, companies
+- Types of analyses:
+  - **Static**: Social network changes slowly over time, e.g., bibliographic network.
+  - **Dynamic**: Rapidly generated and changing content and user base, e.g., instant messaging.
+:::
+
+---
+
+::: {style="font-size: 85%;"}
+- Typical analyses:
+  - Community detection
+  - Analysis of interaction dynamics
+  - Link inference
+  - Transfer learning
+  - Adversary detection
+  - Ranking
+:::
+
+::: {.block style="font-size: 85%;"}
+**Questions**  
+What do Social Networks look like? How do they behave over time? What distribution of patterns do they maintain?
+:::
+
+# Analytics Tools {data-stack-name="Analytics Tools"}
+
+## Preliminaries:
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 65%;"}
+- Graphs: $G = (V, E, W)$
+  - $V$: vertices (nodes), $E$: edges (links), $W$: weights
+  - Edges (links):
+    - Directed: phone call, follower on Twitter
+    - Undirected: collaboration, friendship on Facebook
+    - Weighted: edge $e_{ij}$ has weight $w_{ij}$
+    - $E_{max} = \binom{N}{2} = \frac{N(N-1)}{2}, N = |V|$
+  - Vertices (nodes):
+    - Node degree $k_i$: number of edges adjacent
+    - In-degree $k^{in}$
+    - Out-degree $k^{out}$
+:::
+:::
+
+::: {.column style="text-align: center;"}
+- **Example**:
+![](fig/graph-model.PNG){width=80%}
+:::
+
+:::
+
+---
+
+### Graph Basics
+
+::: {style="font-size: 85%;"}
+- Graphs: $G = (V, E, W)$
+  - Unipartite, multipartite (typically bipartite)
+    - Homogeneous nodes vs nodes of different classes
+    - ![](fig/bipartite.PNG){width=70%}
+  - Adjacency matrix $A$, $|V| \times |V|$ matrix
+    - Sparsity is preferable (for calculations)
+    - $|E| \ll E_{max}$ or $\bar{k} \ll N-1$
+:::
+
+---
+
+### Preliminaries: Components
+
+::: {.columns}
+
+::: {.column}
+::: {.incremental style="font-size: 65%;"}
+- **(Weakly) Connected Component**: Set of nodes and edges where there exists a path between any two nodes in set.
+  - **Strongly Connected (SCC)**: Directed path between any two nodes.
+    - The elements from every pair of nodes in $S$ can reach each other.
+    - There is no larger set containing $S$ with the same property.
+- **Disconnected Graph**: Consists of two or more connected components.
+- **Bridge Edge**: If deleted, the graph becomes disconnected.
+- **Directed Acyclic Graph (DAG)**: Has no cycles.
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/connected-graph.PNG){width=100%}
+:::
+
+:::
+
+---
+
+### Characteristics
+
+::: {style="font-size: 75%;"}
+- **Degree Distribution** $P(k)$:
+  - Probability that a node has degree $k$.
+- **Path**:
+  - Sequence of nodes traversed (e.g., $<N_1, N_2, N_3, N_2>$).
+- **Distance Between Nodes** $h_{ij}$:
+  - Length of the shortest path connecting them.
+- **Diameter of Network**:
+  - The shortest path between any pair of nodes.
+- **Average Path Length**:
+  - $\bar{h} = \frac{1}{2E_{max}}\sum_{j \neq i} h_{ij}$
+:::
+
+---
+
+### Examples 1
+
+
+![](fig/DAG-Example1.PNG){width=98%}
+
+
+---
+
+### Examples 2
+
+
+![](fig/DAG-Example2.PNG){width=90%}
+
+
+
+## Vertex/Node-Based 
+
+---
+
+### Centrality - Degree
+
+::: {.incremental style="font-size: 80%;"}
+- A central actor is involved in many ties:
+  - **Degree centrality/prestige centrality**: Referrals
+    - In-links
+    - PageRank
+  - **Degree centrality (undirected)**:
+    - Number of immediate connections
+    - $C_{D}(i) = \frac{k_i}{|V| - 1}$
+  - **Prestige centrality (directed)**:
+    - Everyone points to this node
+    - $C_{P}(i) = \frac{k_{i}^{in}}{|V| - 1}$
+:::
+
+---
+
+### Centrality: Betweenness
+
+::: {.incremental style="font-size: 70%;"}
+- **A central actor is indispensable**:
+  - Lots of connections pass through it.
+  - Choke-point for information.
+  - How many pairs of individuals would have to go through you in order to reach one another in the minimum number of hops?
+  - If a node is on the path between two non-adjacent actors, it can influence the interaction.
+- **Betweenness centrality**:
+  - Calculation: Number of the shortest paths that go through $V$ vs total number of the shortest paths that exist between all pairs of nodes.
+  $$C_V = \frac{\sum_{s \neq v \neq t} \sigma_{st}(v)}{\sum_{s \neq v \neq t} \sigma_{st}}$$
+  - $\sigma_{st}$: The number of shortest paths between $s$ and $t$.
+  - $\sigma_{st}(v)$: The shortest paths that go through $v$.
+:::
+
+---
+
+### Centrality: Example
+
+::: {.columns}
+
+::: {.column style="text-align: center;"}
+![](fig/centrality-left.PNG){width=100%}
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/centrality-right.PNG){width=100%}
+:::
+
+:::
+
+---
+
+### Centrality: Exercise
+
+::: {.columns}
+
+::: {.column style="text-align: center;"}
+- **Graph**
+![](fig/centrality-exercise.PNG){width=80%}
+:::
+
+::: {.column}
+::: {.incremental style="font-size: 55%;"}
+- **Calculate**:
+  - **Degree centrality of A-D**:
+    - A: $1/3$
+    - B: $3/3$
+    - C: $2/3$
+    - D: $2/3$
+  - **Betweenness centrality of B**:
+    - **Number of Shortest Paths**:
+      - A-C: 1
+      - A-D: 1
+      - C-D: 1
+    - **Number of Shortest Paths through B**:
+      - A-C: 1
+      - A-D: 1
+      - C-D: 0
+    - **Centrality**: $2/3$
+:::
+:::
+
+:::
+
+---
+
+### Clustering Coefficient
+
+::: {.incremental style="font-size: 75%;"}
+- **Portion of connected neighbours of node $i$**:
+  - Number of connections vs maximum number of connections.
+  - **Local clustering coefficient of node $i$**:
+    $$
+    C_i^{Directed} = \frac{\sum_{j, k \in N_i} e_{jk}}{k_i (k_i - 1)}, \quad C_i^{Undirected} = \frac{\sum_{j, k \in N_i} e_{jk}}{k_i (k_i - 1)/2}
+    $$
+    - $N_i = \{v_j \in V| e_{ij} \in E \vee e_{ji} \in E\}$: the neighbourhood of $i$.
+    - **Denominator**: Possible connections between adjacent nodes.
+  - **Average clustering coefficient**:
+    - Average local density.
+    - $C = \frac{1}{|N|} \sum_i^{|N|} C_i$
+:::
+
+---
+
+### Clustering Coefficient: Exercise
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 100%;"}
+- **What is the local clustering coefficient of node B?**
+  - $N = \{A, C, D\}$
+  - $k_i = 3$
+  - $C_B = \frac{1}{(3 \times 2) / 2}$
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/centrality-exercise-force.PNG){width=85%}
+:::
+
+:::
+
+---
+
+### Clustering Coefficient 
+
+::: {style="font-size: 80%;"}
+- **Captures the tendency of networks to cluster together**.
+- More nodes are connected than (uniform randomly) expected.
+- Signifies that nodes in a neighbourhood tend to stick together:
+  - E.g., groups of friends in a social network.
+  - **Higher clustering coefficient**:
+    - Indicates **less importance** in a global network sense, as such nodes are embedded within tightly-knit clusters and may not act as bridges between clusters.
+    - Indicates **more importance** in a local sense, as the node plays a central role within its immediate neighborhood.
+:::
+
+---
+
+## Statistical Properties
+
+### Distribution
+
+::: {style="font-size: 70%;"}
+- **Distribution of Node Connectivity**:
+  - Heavy tails (right skew): Strong nodes have many connections, weak nodes still have a few.
+  - Power law: $P(k) = k^{-\alpha}$.
+  - Straight line on a log-log plot with slope $-\alpha$.
+:::
+
+::: {style="text-align: center;"}
+![](fig/node-connectivity.PNG){width=70%}
+:::
+
+
+---
+
+### Distribution of node connectivity
+
+::: {style="text-align: center;"}
+![](fig/node-connectivity-2.PNG){width=80%}
+:::
+
+
+---
+
+### Power Law
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 85%;"}
+- **Model of Preferential Attachment**:
+  - Stems from citation analysis: New citations are proportionate to the number a paper already has.
+  - "Rich get richer" model.
+:::
+:::
+
+::: {.column style="text-align: center; font-size: 85%;"}
+![](fig/powerlaw.PNG){width=100%}
+
+**Source**: [http://www.ladamic.com/](http://www.ladamic.com/)
+:::
+
+:::
+
+---
+
+## Small Worlds
+
+---
+
+### Experiment
+
+::: {.columns}
+
+::: {.column}
+::: {.incremental style="font-size: 80%;"}
+- **Typical shortest path between any two people?**
+  - **Small-world experiment** (Milgram, 1967, [Link](https://www.youtube.com/watch?v=NberyK6kt8c)):
+    - 300 people from Omaha, Nebraska, and Kansas.
+    - Asked to send a letter to a stockbroker in Boston by passing the letter through friends.
+    - Recorded the number of steps taken.
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/small-world-left.PNG){width=100%}
+![](fig/small-world-right.PNG){width=100%}
+:::
+
+:::
+
+
+---
+
+### Bacon number
+
+::: {.columns}
+
+::: {.column}
+::: {.incremental style="font-size: 85%;"}
+- **Six Degrees of Kevin Bacon**:
+  - Create a network of Hollywood actors.
+  - Connect actors if they appeared in the same movie.
+  - **Bacon number**: Number of steps to Kevin Bacon.
+  - [https://www.sixdegrees.org/](https://www.sixdegrees.org/)
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/kevinbacon.jpg){width=100%}
+:::
+
+:::
+
+---
+
+### Example of Small World
+
+```{python}
+import networkx as nx
+import plotly.graph_objects as go
+
+# Create a Watts–Strogatz small-world network
+G = nx.watts_strogatz_graph(n=30, k=4, p=0.1)
+
+# Calculate a 3D layout for the nodes
+pos_3d = nx.spring_layout(G, dim=3, seed=42)
+
+# Extract node coordinates
+x_nodes = []
+y_nodes = []
+z_nodes = []
+for node in G.nodes():
+    x_nodes.append(pos_3d[node][0])
+    y_nodes.append(pos_3d[node][1])
+    z_nodes.append(pos_3d[node][2])
+
+# Build edge coordinate lists for Plotly
+edge_x = []
+edge_y = []
+edge_z = []
+for edge in G.edges():
+    x0, y0, z0 = pos_3d[edge[0]]
+    x1, y1, z1 = pos_3d[edge[1]]
+    # Plotly needs a break (None) to start a new line for each edge
+    edge_x += [x0, x1, None]
+    edge_y += [y0, y1, None]
+    edge_z += [z0, z1, None]
+
+# Create a Plotly trace for edges
+edge_trace = go.Scatter3d(
+    x=edge_x, y=edge_y, z=edge_z,
+    mode='lines',
+    line=dict(color='lightblue', width=2),
+    hoverinfo='none'
+)
+
+# Create a Plotly trace for nodes
+node_trace = go.Scatter3d(
+    x=x_nodes, y=y_nodes, z=z_nodes,
+    mode='markers',
+    marker=dict(symbol='circle', size=5, color='pink'),
+    text=[f"Node {n}" for n in G.nodes()],
+    hoverinfo='text'
+)
+
+# Combine the traces into a figure
+fig = go.Figure(
+    data=[edge_trace, node_trace],
+    layout=go.Layout(
+        title="Small-World Network in 3D (Plotly)",
+        showlegend=False,
+        scene=dict(
+            xaxis=dict(showbackground=False),
+            yaxis=dict(showbackground=False),
+            zaxis=dict(showbackground=False)
+        )
+    )
+)
+
+fig.show()
+```
+
+---
+
+### Smaller Number on Digital Plataform
+
+
+::: {style="font-size: 85%;"}
+- **Facebook**:
+  - 99.6% of users are connected by degree 5 (6 hops).
+  - 92% are connected by only 4 degrees.
+:::
+
+
+::: {style="text-align: center; font-size: 75%;"}
+![](fig/facebook.PNG){width=65%}
+
+[Reference Link](https://www.thedrum.com/news/2011/11/23/facebook-shrinks-world-four-degrees-separation)
+:::
+
+---
+
+### Causes for Small World
+
+::: {.columns}
+
+::: {.column}
+::: {.incremental style="font-size: 80%;"}
+- **High Clustering**: Social networks tend to have groups of friends who are more interconnected.
+- **Short Path Lengths (Diameter)**: Despite clustering, there are typically short paths that connect different groups.
+- **Random Connections**: Random links between distant nodes significantly reduce the average path length.
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/DuncanWatts.PNG){width=80%}
+**Source**: [http://www.ladamic.com/](http://www.ladamic.com/)
+:::
+
+:::
+
+---
+
+### Cause (Continuous)
+
+::: {style="font-size: 75%;"}
+- **Cause of Small Worlds (Duncan Watts)**:
+  - A network with low clustering can still be a small world.
+  - Only a few random links are enough to create a small-world effect.
+:::
+
+::: {style="text-align: center; font-size: 50%;"}
+![](fig/DuncanWatts2.PNG){width=65%}
+
+**Source**: [http://www.ladamic.com/](http://www.ladamic.com/)
+:::
+
+---
+
+### Smaller Worlds on Digital Platforms
+
+::: {.incremental style="font-size: 65%;"}
+- **Dense Connectivity**: 
+  - Platforms like Facebook encourage adding friends from diverse parts of life, creating tightly-knit clusters.
+- **Global Reach**:
+  - Digital platforms bridge geographical barriers, connecting people across the globe.
+- **Algorithmic Recommendations**:
+  - Platforms suggest connections, increasing the chances of linking with mutual acquaintances.
+- **Implications**:
+  - Efficient spread of information or influence.
+  - Quick navigation across the network to reach anyone.
+  - Vulnerability to the rapid spread of misinformation or harmful content.
+:::
+
+---
+
+## Link/Edge-Based
+
+---
+
+### Link Properties
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 70%;"}
+- **Triadic Closure**:
+  - If two people in a SN have a friend in common, more likelihood they will become friends themselves.
+  - This principle explains the evolution of networks over time in many situations.
+  
+![](fig/triadic-closure.png){width=90%}
+:::
+:::
+
+::: {.column style="font-size: 70%;"}
+- **Strength of Ties**:
+  - **Number of interactions**:
+    - Reciprocal services (e.g., #calls).
+  - **Time spent together**.
+  - **Strong Ties**:
+    - Represent dependable links, corresponding to friends who provide social or emotional support.
+  - **Weak Ties**:
+    - Represent acquaintances or less close relations that do not involve close friendship.
+:::
+
+:::
+
+---
+
+### Friend of a Friend is a Friend
+
+::: {.callout-important title="Triadic Closure"}
+Triadic closure is a concept in social network theory, first suggested by German sociologist Georg Simmel in his 1908 book *Soziologie* (*Sociology: Investigations on the Forms of Sociation*).
+:::
+
+::: {.columns}
+
+::: {.column}
+![](fig/triadic-closure.PNG){width=85%}
+:::
+
+::: {.column style="font-size: 75%;"}
+- **Strong Ties and Triadic Closure**:
+  - **Weak Claim**: A new edge B-C is more likely when A-B and A-C are ties.
+  - **Strong Claim**: If there exists strong ties between A and B/C, there must be an edge B-C.
+:::
+
+:::
+
+---
+
+### Triadic Closure: Clustering Coefficient
+
+::: {.columns}
+
+::: {.column}
+::: {.incremental style="font-size: 75%;"}
+- **Consider Clustering Coefficient $C_A$ of Node A**:
+  - Probability that two random friends of A are friends themselves.
+  - **Before New Edge**: $C_A = \frac{1}{4 \times 3 / 2}$
+  - **After New Edge**: $C_A = \frac{2}{4 \times 3 / 2}$
+  - Higher clustering coefficient after the new edge.
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/triadic-closure2.PNG){width=90%}
+:::
+
+:::
+
+---
+
+### Triadic Closure: Causes
+
+
+::: {style="font-size: 80%;"}
+- **Meet Friends Through Friends**:
+  - Have **opportunities** to meet through common friends.
+  - Mutual **trust** in shared friends.
+  - **Incentive** to pair friends to avoid stress in relationships.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/triadic-closure3.PNG){width=80%}
+:::
+
+---
+
+### Bridge
+
+::: {style="font-size: 75%;"}
+- **Bridges**:
+  - If removed, the components of the network become disconnected.
+:::
+
+::: {style="text-align: center;"}
+![](fig/bridge.PNG){width=89%}
+:::
+
+---
+
+### Local Bridges
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 75%;"}
+- **Local Bridges (Equivalent Definitions)**:
+  - Any edge whose endpoints have no friends in common.
+  - Any edge with zero neighbour overlap is called a local bridge.
+  - Any edge whose deletion results in increasing the distance between the endpoints to a value strictly more than two.
+:::
+:::
+
+::: {.column style="text-align: center; font-size: 75%;"}
+- **Example**:
+  - A-B is the only **local bridge** in the above graph.
+  
+![](fig/local_bridge.PNG){width=95%}
+:::
+
+:::
+
+---
+
+### Strong Triadic Closure
+
+::: {.callout-important title="Strong Triadic Closure Property"}
+A node $A$ violates the **Strong Triadic Closure Property** if it has strong ties to two non-linked nodes $B$ and $C$.
+:::
+
+::: {.columns}
+
+::: {.column}
+![](fig/strong-triadic-closure.PNG){width=90%}
+:::
+
+::: {.column style="text-align: center;font-size: 75%;"}
+- **Observations**:
+  - No node in the left figure violates the Strong Triadic Closure Property.
+  - If we change A-F and A-B to strong ties, then it violates the Strong Triadic Closure Property due to the absence of links B-F, B-E, and A-G.
+
+:::
+
+:::
+
+---
+
+### Local Bridges and Weak Ties
+
+::: {.callout-important title="Proposition"}
+If a node $A$ in a network satisfies the **Strong Triadic Closure Property** and is involved in at least two strong ties, then any local bridge it is involved in must be a weak tie.
+:::
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 75%;"}
+- **Illustration**:
+![](fig/Local-Bridge-vs-Weak-Ties.PNG){width=80%}
+:::
+:::
+
+::: {.column}
+::: {style="font-size: 85%;"}
+- A connection between:
+  - **Local bridge** (a structural view).
+  - **Strong and weak ties** (an individual view).
+:::
+:::
+
+:::
+
+---
+
+### Ties
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 75%;"}
+- **Triadic Closure**:
+  - Useful for analyzing people that can be addressed.
+  - E.g., in campaigns for sport shoes.
+- **Visualization of Concepts**
+:::
+
+::: {style="text-align: center;"}
+![](fig/ties.PNG){width=80%}
+:::
+
+:::
+
+::: {.column style="text-align: center;font-size: 85%;"}
+
+- **Weak Ties**:
+  - Tend to carry different information compared to close contacts.
+    - In experiments, acquaintanceship ties were more effective at passing information.
+    - E.g., in recommending jobs --> untapped/undiscovered community.
+:::
+
+:::
+
+---
+
+### Weak Ties: Example
+
+::: {style="text-align: center;font-size: 75%;"}
+![](fig/weak-tie.PNG){width=70%}
+
+Mobile Call Graph with Edge Strength
+:::
+
+
+---
+
+## Graph Structure 
+
+---
+
+### Community Discovery
+
+::: {style="font-size: 85%;"}
+- **Community Discovery**:
+  - Identifies groups or clusters within a network that are more densely connected internally.
+  - Networks are strongly modular.
+  - Cliques exist, e.g., groups of friends, user bases, etc.
+
+:::
+
+
+:::{.callout-tip title="Basic Idea"}
+Partition a graph to minimize connections between different groups while maximizing connections within the same group.
+:::
+
+---
+
+### Normalised Cut (Ncut)
+
+::: {.incremental style="font-size: 75%;"}
+- **Ncut**:
+  - A criterion for measuring the quality of a network division into clusters or communities.
+- **Normalised Cut** of a group of nodes $S, \bar{S} \subset V$:
+  $$
+  Ncut(S) = \frac{\sum_{i \in S, j \in \bar{S}} A(i, j)}{\sum_{i \in S} k_i} + \frac{\sum_{i \in S, j \in \bar{S}} A(i, j)}{\sum_{j \in \bar{S}} k_j}
+  $$
+- **Interpretation**:
+  - Low Ncut signifies good communities as they are well-connected internally but sparsely connected externally.
+:::
+
+---
+
+### Normalised Cut (Ncut): Continues
+
+::: {.incremental style="font-size: 75%;"}
+- **Quality Functions**:
+  - **Kernighan-Lin Objective**:
+    - Minimise the number of inter-cluster edges (or weights) of the same size.
+    - $KLObj(V_1, \cdots, V_k) = \sum_{i \neq j} A(V_i, V_j)$
+  - **Modularity**:
+    - Measures whether subgraphs are far from random subgraphs.
+    - Independent of the number of clusters.
+    - $m$: Number of edges in the graph.
+    $$
+    Q = \sum_{c=1}^k \left[\frac{A(V_c, V_j)}{m} - \left(\frac{k_{V_c}}{2m}\right)^2\right]
+    $$
+:::
+
+---
+
+### Normalised Cut (Ncut): Directed Network
+
+::: {.incremental style="font-size: 65%;"}
+- **Directed Networks**:
+  - **Normalised Cut**:
+    $$
+    Ncut_{dir}(S) = \frac{\sum_{i \in S, j \in \bar{S}} \pi(i)P(i, j)}{\sum_{i \in S} \pi(i)} + \frac{\sum_{i \in S, j \in \bar{S}} \pi(i)P(i, j)}{\sum_{j \in \bar{S}} \pi(j)}
+    $$
+    - $P$: Transition matrix of a random walk.
+    - $\pi$: Stationary distribution vector (see PageRank).
+    - Typically minimised using spectral clustering.
+  - **Modularity**:
+    $$
+    Q = \frac{1}{m} \sum_{i, j \in E} \left[A_{ij} - \frac{k_i^{in} k_j^{out}}{m}\right] \delta_{c_i, c_j}
+    $$
+    - $\delta_{c_i, c_j}$: 1 if community of $i$ equals community of $j$, 0 otherwise.
+    - Measures community quality in directed networks.
+:::
+
+---
+
+### Graph Partition Algorithm
+
+::: {style="font-size: 70%;"}
+- **Kernighan-Lin (KL) Algorithm** (Partition a graph into two blocks):
+  - Classic graph partitioning.
+  - For each iteration, search for nodes that can be swapped to reduce the number of inter-cluster edges (edge cut).
+  - **Gain**: Reduction in edge cut when moving nodes.
+  - Nodes with the largest gain are repeatedly selected from larger partition.
+:::
+
+::: {.columns}
+
+::: {.column .incremental style="font-size: 70%;"}
+- **Example KL Algorithm**:
+  - Swapping A-D: 1 fewer cuts (4:3).
+  - Swapping B-D: 1 fewer cuts (4:3).
+  - Swapping C-D: **2 fewer cuts** (4:2).
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/CommunityDiscovery.PNG){width=90%}
+:::
+
+:::
+
+---
+
+### Agglomerative / Divisive Algorithms
+
+
+::: {style="font-size: 75%;"}
+  - **Agglomerative**: Start from single-node communities (bottom-up approach).
+  - **Divisive**: Start from all-nodes community (top-down approach).
+:::
+
+::: {style="text-align: center;"}
+![](fig/agg-clustering.png){width=35%}
+![](fig/divisive-clustering.png){width=35%}
+:::
+
+---
+
+### Girvan and Newman (Divisive) Algorithm
+
+::: {.callout-note title="Edge Betweenness"}
+The number of the shortest paths that go through a specific edge vs the total number of the shortest paths.
+:::
+
+::: {.incremental style="font-size: 85%;"}
+1. For every edge in a graph, calculate the edge betweenness centrality.
+2. Remove the edge with the highest betweenness centrality.
+3. Recalculate the betweenness centrality for every remaining edge.
+4. Repeat steps 2-4 until there are no more edges left.
+:::
+
+---
+
+### Girvan and Newman (Divisive) Algorithm
+
+::: {style="text-align: center;"}
+![](fig/divisive-graph.PNG){width=90%}
+:::
+
+---
+
+### Girvan and Newman (Divisive) Algorithm
+
+::: {style="text-align: center;"}
+![](fig/divisive-graph-full.PNG){width=90%}
+:::
+
+---
+
+### Spectral and Other Approaches
+
+::: {.incremental style="font-size: 85%;"}
+- **Spectral Algorithms**:
+  - Use top $k$ eigenvectors of the adjacency matrix to represent nodes in a $k$-dimensional space.
+  - Apply regular clustering techniques.
+  - Computational cost of Singular Vector Decomposition (SVD) is high.
+- **Other Approaches**:
+  - Local graph clustering.
+  - Multi-Level Regularised Markov Clustering.
+:::
+
+---
+
+### Further Questions
+
+::: {style="font-size: 65%;"}
+- **Dynamic Networks**:
+  - How to incorporate temporal information?
+    - Use events to describe the change in communities:
+      - Appear, disappear, join, when?
+  - Treating graphs as snapshots is not effective:
+    - Use temporal slices of the network.
+  - Find meta-groups:
+    - Sequence of groups which are similar.
+  - Using snapshot quality and history cost:
+    - How well is the clustering, and how different are the clusters?
+
+- **Challenges**:
+  - Incorporating content:
+    - Not only topological information to be analysed.
+    - Perform semantically coherent and meaningful analysis of the network.
+    - E.g., network + email content.
+:::
+
+
+# Case Study {data-stack-name="Case Study"}
+
+## Twitter (X)
+
+::: {style="font-size: 65%;"}
+- **Microblogging Platform** [Source: [Cybernews](https://cybernews.com/news/twitter-expands-tweet-character-limit)]:
+  - Character Limit: Standard users: 280 characters.
+  - Users: ~650 million monthly active users, ~240–300 million daily active users.
+  - No reciprocation necessary for following.
+  - Hashtags create a natural way of tracking topics.
+  - Retweet (RT) functionality enables content amplification.
+
+- **Popularity in Research**:
+  - API is more open and accessible compared to other platforms.
+  - Easy to find and follow conversations.
+  - Strong hashtag culture facilitates gathering, sorting, and expanding searches for data collection.
+  - Many researchers favour it due to positive personal experiences.
+
+- **Significance**:
+  - A global reach and real-time information-sharing capabilities make it a critical platform for communication and research.
+:::
+
+---
+
+### Twitter: Observations from Social Network
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 75%;"}
+- **Observations**:
+  - Power law $\alpha$ is roughly 5 (high).
+  - Bump at 20: Reflects initial suggestions.
+  - Bump at 2000: Maximum follower limit before 2009.
+:::
+:::
+
+::: {.column style="text-align: center;"}
+![](fig/Twitter-Analysis.PNG){width=100%}
+:::
+
+:::
+
+---
+
+### Twitter: Followers and Tweets
+
+
+::: {style="font-size: 75%;"}
+  - Many users never tweet (low median).
+  - The average number of tweets per follower exceeds the median; users tweet far more than expected.
+  - Observations include:
+    - Dips at 20/2000.
+    - Spam accounts commonly seen follower #250/500/2,000/5,000.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/Twitter-Analysis2.PNG){width=92%}
+:::
+
+---
+
+### Twitter: Degrees of Separation
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 80%;"}
+- **Degrees of Separation**:
+  - Average path length is 4.12.
+- **Ranking Users**:
+  - **PageRank**: A measure of importance based on connections.
+  - **Retweets**: Reflects influence through content amplification.
+:::
+:::
+
+::: {.column style="text-align: center;"}
+- **Graph**:
+![](fig/Twitter-Rank-users.PNG){width=98%}
+:::
+
+:::
+
+---
+
+## Top Reviewer Analysis
+
+
+::: {style="font-size: 75%;"}
+- **1,000 Top Reviewers**:
+- Data collected on products reviewed from Amazon.com.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/TRA-1.PNG){width=85%}
+:::
+
+---
+
+::: {style="text-align: center;"}
+![](fig/TRA-2.PNG){width=85%}
+:::
+
+---
+
+::: {style="text-align: center;"}
+![](fig/TRA-3.PNG){width=85%}
+:::
+
+---
+
+::: {style="text-align: center;"}
+![](fig/TRA-4.PNG){width=85%}
+:::
+
+# Summary {data-stack-name="Summary"}
+
+## Take Home Messages
+
+::: {style="font-size: 75%;"}
+- Social Media & Social Network
+- Analytics Tools on Graph:
+  - **Centrality** ***
+  - **Clustering Coefficient** ***
+  - Statistical Properties:
+    - **Link Property** ***
+    - **Community Discovery** *
+- Case Study:
+  - Twitter
+  - Top Reviewer Analysis
+:::
+
+
+
