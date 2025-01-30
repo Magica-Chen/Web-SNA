@@ -1,0 +1,95 @@
+---
+title: "Web and Social Network Analytics"
+subtitle: "Week 4: Unsupervised Learning Techniques"
+project: ../_quarto.yml
+author:
+  - name: Dr. Zexun Chen
+    orcid: 0000-0001-7883-8573
+    email: Zexun.Chen@ed.ac.uk
+format:
+  revealjs:
+    theme: sky
+    section-divs: false
+    title-slide-attributes:
+        data-state: "hide-menubar"
+    center: true
+    transition: slide
+    background-transition: fade
+    controls: true
+    slide-number: true
+    # controls-layout: bottom-right
+    chalkboard: true
+    menu: true
+    html:
+      embed-resources: true
+      self-contained-math: true
+    output-file: index.html
+    simplemenu:
+        flat: true
+        barhtml:
+            header: "<div class='menubar'><ul class='menu'></ul></div>"
+        scale: 0.5
+revealjs-plugins:
+  - simplemenu
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+date: "February 2025"
+date-format: "MMM-YYYY"  
+jupyter: python3
+
+---
+
+## Table of Contents {data-state="hide-menubar"}
+
+<ul class="menu"><ul>
+
+# Introduction {data-stack-name="Introduction"}
+
+## Introduction
+
+:::{.columns}
+
+::: {.column style="font-size: 75%;"}
+- **Predictive Analytics**:
+  - All about the dependent variables
+  - What if there is no dependent variable?
+    - Sales purchases
+    - Reviews without a score
+    - Website paths
+    - ...
+:::
+
+::: {.column style="font-size: 75%;"}
+  - **General idea**:
+    - Putting similar items into a group
+    - Finding features
+
+![](fig/sup-vs-unsup.png){width=100%}
+
+
+:::
+
+:::
+
+
+
+# Clustering {data-stack-name="Clustering"}
+
+
+
+# Frequent Itemset Analysis {data-stack-name="Itemset"}
+
+
+# Recommendation Systems {data-stack-name="Recommendation"}
+
+
+
+
+
+
+
+
+
