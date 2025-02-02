@@ -597,7 +597,7 @@ jupyter: python3
     - **Input**: Ratings from users in $U$ of items in $I$ (or vice versa).
     - **Output**: Find similar users in $U$, apply their ratings/interests to items in $I$ (or vice versa).
   - **Content-Based Filtering (Supervised)**:
-    - **Input**: Ratings of $U$ for $I$.
+    - **Input**: Ratings from users in $U$ for items in $I$.
     - **Output**: Generate a classifier that applies users' characteristics and ratings to $I$ for a new user.
 :::
 
@@ -671,7 +671,7 @@ jupyter: python3
 
 - Find the similarity between **Douglas and Maurizio**.
 - Find the similarity between **Johannes and Maurizio**.
-- What product(s) would you recommend Maurizio?
+- What product(s) would you recommend for Maurizio?
 :::
 
 
@@ -710,7 +710,7 @@ jupyter: python3
 ### Similarity Measures: Q3 Solution
 
 ::: {style="font-size: 65%;"}
-**Question 3**: What product(s) would you recommend Maurizio?
+**Question 3**: What product(s) would you recommend for Maurizio?
 
 - **Recommendation Based on Similarity**:
   - **Highest similarity** with **Douglas**.
@@ -720,14 +720,14 @@ jupyter: python3
 ::: {style="text-align: center; font-size: 60%;"}
 ![](fig/RS4.PNG){width=95%}
 :::
-:::
+
 
 ---
 
 ### Similarity Measures: Q3+
 
 ::: {style="font-size: 60%;"}
-**Question 3+**: What product(s) would you recommend Maurizio now?
+**Question 3+**: What product(s) would you recommend for Maurizio now?
 
 - **Highest similarity** with **Douglas and Tong**.
 - **Average rank of MATLAB**:

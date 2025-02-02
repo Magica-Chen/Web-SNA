@@ -935,7 +935,7 @@ lift(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A) \times sup(B)}
 </ul></li>
 <li><strong>Content-Based Filtering (Supervised)</strong>:
 <ul>
-<li><strong>Input</strong>: Ratings of <span class="math inline">\(U\)</span> for <span class="math inline">\(I\)</span>.</li>
+<li><strong>Input</strong>: Ratings from users in <span class="math inline">\(U\)</span> for items in <span class="math inline">\(I\)</span>.</li>
 <li><strong>Output</strong>: Generate a classifier that applies users’ characteristics and ratings to <span class="math inline">\(I\)</span> for a new user.</li>
 </ul></li>
 </ul></li>
@@ -1004,7 +1004,7 @@ r_{X Y}=\frac{n \sum x_{i} y_{i}-\sum x_{i} \sum y_{i}}{\sqrt{n \sum x_{i}^{2}-\
 <ul>
 <li>Find the similarity between <strong>Douglas and Maurizio</strong>.</li>
 <li>Find the similarity between <strong>Johannes and Maurizio</strong>.</li>
-<li>What product(s) would you recommend Maurizio?</li>
+<li>What product(s) would you recommend for Maurizio?</li>
 </ul>
 </div>
 <div style="text-align: center; font-size: 60%;">
@@ -1035,7 +1035,7 @@ r_{X Y}=\frac{n \sum x_{i} y_{i}-\sum x_{i} \sum y_{i}}{\sqrt{n \sum x_{i}^{2}-\
 
 <h3 id="similarity-measures-q3-solution">Similarity Measures: Q3 Solution</h3>
 <div style="font-size: 65%;">
-<p><strong>Question 3</strong>: What product(s) would you recommend Maurizio?</p>
+<p><strong>Question 3</strong>: What product(s) would you recommend for Maurizio?</p>
 <ul>
 <li><strong>Recommendation Based on Similarity</strong>:
 <ul>
@@ -1047,13 +1047,12 @@ r_{X Y}=\frac{n \sum x_{i} y_{i}-\sum x_{i} \sum y_{i}}{\sqrt{n \sum x_{i}^{2}-\
 <div style="text-align: center; font-size: 60%;">
 <p><img data-src="fig/RS4.PNG" style="width:95.0%"></p>
 </div>
-<p>:::</p>
 </section>
 <section class="slide level2 center">
 
 <h3 id="similarity-measures-q3">Similarity Measures: Q3+</h3>
 <div style="font-size: 60%;">
-<p><strong>Question 3+</strong>: What product(s) would you recommend Maurizio now?</p>
+<p><strong>Question 3+</strong>: What product(s) would you recommend for Maurizio now?</p>
 <ul>
 <li><strong>Highest similarity</strong> with <strong>Douglas and Tong</strong>.</li>
 <li><strong>Average rank of MATLAB</strong>:
