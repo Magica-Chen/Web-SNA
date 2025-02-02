@@ -68,28 +68,749 @@ jupyter: python3
     - Finding features
 
 ![](fig/sup-vs-unsup.png){width=100%}
-
-
 :::
-
 :::
-
 
 
 # Clustering {data-stack-name="Clustering"}
 
+## Basic Idea
+
+::: {.columns}
+
+::: {.column style="text-align: center;font-size: 65%;"}
+
+- Group instances that are similar
+- Based on the distance between instances:
+  - Every instance is a point in an n-dimensional space.
+  - **Euclidean distance**:
+    $$
+    d(\textbf{a}, \textbf{b}) = \sqrt{\sum_{i=1}^n (a_i - b_i)^2}
+    $$
+  - **Manhattan distance**:
+    $$
+    d(\textbf{a}, \textbf{b}) = \|\textbf{a} - \textbf{b}\|_1 = \sum_{i=1}^n \|a_i - b_i\|
+    $$
+
+:::
+
+::: {.column}
+::: {style="font-size: 50%;"}
+![](fig/clustering-fig.jpg){width=80%}
+
+- **Common Approaches**:
+  - Connectivity-based clustering (hierarchical clustering).
+  - Centroid-based clustering: e.g., K-means, K-median.
+  - Distribution-based clustering: e.g., Gaussian Mixture Model.
+  - Density-based clustering: e.g., DBSCAN (Density-Based Spatial Clustering of Applications with Noise).
+:::
+:::
+
+:::
+
+---
+
+## Connectivity-based: Hierarchical Clustering
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 65%;"}
+- **Process**:
+  - Start with every point in its own cluster.
+  - Combine the two closest clusters.
+    - Repeat until a stopping condition is met:
+      - Desired number of clusters is reached.
+      - Minimum similarity threshold (clusters are far enough apart).
+
+:::
+:::
+
+::: {.column style="text-align: center;font-size: 75%;"}
+
+- **Dendrogram**:
+  - A dendrogram is a diagram that shows the hierarchical relationship between objects.
+
+![](fig/dendrogram.PNG){width=99%}
+:::
+
+:::
+
+---
+
+### Hierarchical Structure
+
+::: {style="text-align: center;font-size: 75%;"}
+![](fig/agglomerative-vs-divisive.png){width=90%}
+:::
+
+---
+
+### Challenges 
+
+::: {style="font-size: 75%;"}
+- **Hard to choose merge/split points**:
+  - Merging/splitting is irreversible.
+  - Decisions are critical and affect final clusters.
+- **Time Complexity**:
+  - $\textbf{O}(n^2)$, making it computationally expensive.
+- **Large Dataset Issues**:
+  - Difficult to determine the correct number of clusters.
+:::
+
+
+---
+
+## Centroid-based: K-means 
+
+::: {.columns}
+
+::: {.column}
+::: {style="font-size: 65%;text-align: center;"}
+- **Initialization**:
+  - Choose K different points that are likely in different clusters.
+  - Make these points the centroids (center of the cluster).
+
+![](fig/clustering-center.jpg){width=90%}
+:::
+:::
+
+::: {.column style="text-align: center; font-size: 70%;"}
+
+- **Repeat Until Convergence**:
+  - Assign points to the closest centroid.
+  - Adjust the centroid.
+  - Stop when no further changes occur in assignments and centroids.
+:::
+
+:::
+
+---
+
+### Example
+
+::: {style="text-align: center;font-size: 85%;"}
+![](fig/kmeans.PNG){width=80%}
+
+[More Visualizations](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/)
+:::
+
+
+---
+
+### Pros and Cons
+
+::: {style="font-size: 60%;"}
+- **Pros**:
+  - Relatively efficient: $\textbf{O}$(tknm), $n$: number of objects, $k$: number of clusters, $t$: number of iterations, $m$: dimension of data, $k, t \leq n$.
+
+- **Cons**:
+  - Often terminates at a local optimum.
+  - Applicable only when mean is defined.
+    - Categorical data? Use **mode** instead of mean (mode = most frequent item(s)).
+  - Requires pre-specifying the number of clusters.
+  - Unable to handle noisy data and outliers.
+    - **Outlier**: objects with extremely large values.
+    - May substantially distort the distribution of the data.
+  - **Curse of Dimensionality**:
+    - High-dimensional spaces are very sparse.
+:::
+
+---
+
+## Distribution-based: Gaussian Mixture Model
+
+
+::: {.columns}
+
+::: {.column style="font-size: 75%;"}
+- **Gaussian Mixture Model (GMM)**:
+  - Assume **k** Gaussian components.
+  - Estimate the parameters of Gaussian distributions (e.g., using Expectation-Maximization (EM) algorithm).
+:::
+
+
+::: {.column style="text-align: center;"}
+![](fig/GMM.jpg){width=99%}
+:::
+
+:::
+
+---
+
+### Pros and Cons
+
+::: {style="font-size: 75%;"}
+- **Pros**:
+  - GMM can capture correlation and dependence between attributes.
+
+- **Cons**:
+  - Strong assumptions, requires Gaussian distribution.
+  - Need to specify the number of Gaussian components.
+
+- **Advanced (Non-Parametric) Models: Dirichlet Process Mixture Model**:
+  - No distribution assumption.
+  - No need to specify the number of components.
+  - For details, refer to [this video](https://www.youtube.com/watch?v=UTW530-QVxo).
+:::
+
+---
+
+## Density-Based Clustering: DBSCAN
+
+::: {style="font-size: 65%;"}
+- **Group points that are close**:
+  - A distance measure is required (e.g., Euclidean distance is commonly used).
+
+- **Basic Procedure**:
+  - Take a random point.
+  - Find all surrounding points within a certain distance (minimum distance is a parameter $\varepsilon$).
+  - Continue until all points within $\varepsilon$ distance of points within the cluster are found (setting a minimum number of points to be a cluster, **minPoints**).
+  - Take a new random point until all points are classified.
+    - Leftover points are outliers.
+
+- **Example**: [DBSCAN Visualization](https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/)
+:::
+
+---
+
+### DBSCAN: Pros and Cons
+
+::: {.columns}
+
+::: {.column style="font-size: 60%;"}
+- **Pros**:
+  - No need to pre-define the number of clusters.
+  - Can identify clusters of any shape, e.g., circle-based (non-linear) relationships.
+  - Robust to outliers.
+
+- **Cons**:
+  - Different clusters may have very different densities.
+  - Clusters may exist in hierarchies.
+  - Still dependent on the chosen distance measure.
+  - Curse of dimensionality remains an issue.
+:::
+
+
+::: {.column style="text-align: center;"}
+![](fig/DBSCAN.png){width=85%}
+:::
+
+:::
 
 
 # Frequent Itemset Analysis {data-stack-name="Itemset"}
 
+## Frequent Itemset
+
+::: {.columns}
+
+::: {.column style="font-size: 65%;"}
+- **What items occur together frequently?**
+  - **Examples**:
+    - Beer, pizza, diapers (hoax).
+    - Golden iPhones and shiny cases (or transparent ones?).
+  - **Formally**:
+    - Set of items: $I = \{beer, pizza, diapers\}$.
+    - Rule: $\{beer, pizza\} \rightarrow \{diapers\}$.
+  - Became famous because of **market basket analysis**.
+:::
+
+
+::: {.column style="text-align: center;"}
+![](fig/pizza-beer-diaper.jpg){width=70%}
+:::
+
+:::
+
+---
+
+### Example
+
+::: {style="text-align: center; font-size: 60%;"}
+- **Example: We have 4 Baskets**
+![](fig/FIA1.PNG){width=85%}
+:::
+
+::: {style="text-align: center;"}
+![](fig/macbook-pro.jpg){width=25%}
+![](fig/GoldenIphone.png){width=25%}
+![](fig/purple-case.jpg){width=25%}
+:::
+
+---
+
+### Finding Association Rules
+
+::: {style="font-size: 80%;"}
+- **Association Rules**:
+  - Defined through an **antecedent** and **consequent**.
+    - Both are subsets of $I$.
+  - Antecedent implies the consequent.
+    - Example: **Beer** $\rightarrow$ **Diapers**.
+  - Calculated over transactions $T$.
+    - Represented as **baskets**.
+  - Measuring Their Impact: **Support**, **Confidence**, **Lift**
+:::
+
+---
+
+### Measuring Impact: Support
+
+::: {style="font-size: 75%;"}
+- **Support**: The number of times $A$ appears among the transactions.
+  $$
+  sup(A) = \frac{|\{A \subseteq t | t \in T\}|}{|T|}
+  $$
+
+- **Example**: Calculate the **support** of **Golden iPhone**.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/FIA1.PNG){width=98%}
+:::
+
+---
+
+::: {style="font-size: 75%;"}
+- **Support**: The number of times $A$ appears among the transactions.
+  $$
+  sup(A) = \frac{|\{A \subseteq t | t \in T\}|}{|T|}
+  $$
+
+- **Example**: Calculate the **support** of **Golden iPhone**.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/FIA2.PNG){width=99%}
+:::
+
+---
+
+### Measuring Impact: Confidence
+
+::: {style="font-size: 75%;"}
+- **Confidence**: The number of times both itemsets occur together given the occurrence of $A$.
+  $$
+  conf(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A)}
+  $$
+
+- **Example**: Calculate the **confidence** of **Golden iPhone** $\rightarrow$ **Purple Case**.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/FIA1.PNG){width=98%}
+:::
+
+---
+
+::: {style="font-size: 75%;"}
+- **Confidence**: The number of times both itemsets occur together given the occurrence of $A$.
+  $$
+  conf(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A)}
+  $$
+
+- **Example**: Calculate the **confidence** of **Golden iPhone** $\rightarrow$ **Purple Case**.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/FIA3.PNG){width=98%}
+:::
+
+---
+
+### Measuring Impact: Lift
+
+::: {style="font-size: 75%;"}
+- **Lift**: The support for both itemsets occurring together given they are independent.
+  $$
+  lift(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A) \times sup(B)}
+  $$
+
+- **Example**: Calculate the **lift** of **Golden iPhone** $\rightarrow$ **Purple Case**.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/FIA4.PNG){width=98%}
+:::
+
+---
+
+::: {style="font-size: 75%;"}
+- **Lift**: The support for both itemsets occurring together given they are independent.
+  $$
+  lift(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A) \times sup(B)}
+  $$
+
+- **Example**: Calculate the **lift** of **Golden iPhone** $\rightarrow$ **Purple Case**.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/FIA5.PNG){width=98%}
+:::
+
+---
+
+### Lift value: example 1  
+
+::: {style="font-size: 60%;"}
+  $$
+  lift(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A) \times sup(B)}
+  $$
+
+- **Interpretation**:
+  - If **lift > 1**: Indicates both items are **dependent** on each other.
+  - If **lift = 1**: Indicates both items are **independent**.
+  - If **lift < 1**: Items are **substitutes** for each other.
+:::
+
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/FIA6.PNG){width=98%}
+:::
+
+---
+
+### Lift value: example 2  
+
+::: {style="font-size: 60%;"}
+  $$
+  lift(A \rightarrow B) = \frac{sup(A \cap B)}{sup(A) \times sup(B)}
+  $$
+
+- **Interpretation**:
+  - If **lift > 1**: Indicates both items are **dependent** on each other.
+  - If **lift = 1**: Indicates both items are **independent**.
+  - If **lift < 1**: Items are **substitutes** for each other.
+:::
+
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/FIA7.PNG){width=98%}
+:::
+
+---
+
+### A-Priori Algorithm
+
+::: {style="font-size: 70%;"}
+- **Finding Association Rules: A-Priori Algorithm**:
+  - Finds all relevant rules by relying on **support** (and confidence).
+
+- **Rationale**:
+  - **Candidate Generation**:
+    - Find support of all itemsets of size **X** (starting with **X = 1**).
+  - Retain all itemsets that meet the **minimum support level (minSup)**.
+  - Repeat for size **X+1** until: No more itemsets meet the criteria, or **X = |I|** (size of the entire itemset).
+
+- **Set Theory Insight**:
+  - The support of **composed itemsets** is always **less than or equal to** that of their components.
+:::
+
+---
+
+### A-Priori Algorithm: Example
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/FIA1.PNG){width=99%}
+:::
+
+::: {style="text-align: center; font-size: 75%;"}
+- **A-Priori Algorithm Example (minSup 50%)**:
+![](fig/A-Algorithm.PNG){width=99%}
+:::
+
+---
+
+### A-Priori Algorithm: Exercise
+
+::: {style="font-size: 60%;"}
+  - Use the **A-Priori Algorithm** to find the **frequent itemsets** in the given transaction list.
+  - **Minimum Support (minSup) = 60%**.
+:::
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/FIA8.PNG){width=78%}
+:::
+
+---
+
+### A-Priori Algorithm: Solution
+
+::: {style="font-size:50%;"}
+  - **Minimum Support (minSup) = 60%**.
+:::
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/FIA8.PNG){width=58%}
+![](fig/A-Algorithm-Exercise.PNG){width=90%}
+:::
+
 
 # Recommendation Systems {data-stack-name="Recommendation"}
 
+## Recommendation Systems
+
+::: {style="font-size: 85%;"}
+- **Finding similar items to what people like**:
+  - Based on previous searches/purchases of others:
+    - Collaborative filtering-based recommendation systems.
+  - Based on items similar to the main interests of the user/buyer:
+    - Content-based recommendation systems.
+
+- **Examples**:
+  - **"Frequently bought together"** on Amazon.
+  - **"Product related to this item"** on virtually every webshop.
+:::
+
+---
+
+### Example
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/drill.PNG){width=100%}
+:::
+
+---
+
+### Basics
+
+::: {style="font-size: 65%;"}
+- **Every item needs to be profiled**:
+  - The characteristics need to be captured in features.
+  - **Example**: Chocolate is **sweet** and **brown**; Beer is **bitter** and can be **brown, yellow, or red**.
+
+- **Some items are harder to analyze**: picture, video, document, **Tags can be used**.
+
+- **Types of Recommendation Systems**:
+  - **Collaborative Filtering (Unsupervised)**:
+    - **Input**: Ratings from users in $U$ of items in $I$ (or vice versa).
+    - **Output**: Find similar users in $U$, apply their ratings/interests to items in $I$ (or vice versa).
+  - **Content-Based Filtering (Supervised)**:
+    - **Input**: Ratings of $U$ for $I$.
+    - **Output**: Generate a classifier that applies users' characteristics and ratings to $I$ for a new user.
+:::
+
+---
+
+### Representation: Utility Matrix
+
+::: {style="font-size: 80%;"}
+- **Utility Matrix**: Describes the relationship between users and items.
+:::
+
+
+::: {style="text-align: center;"}
+![](fig/RS1.PNG){width=98%}
+:::
+
+
+::: {.block}
+**Question**: Does Douglas like R?
+:::
+
+---
+
+## Collaborative Filtering
+
+::: {style="font-size: 80%;"}
+- **Collaborative Filtering**:
+  - Connecting users through **similarity in items**: **User-to-user**.
+  - Connecting items through **similarity in users**: - **Item-to-item**.
+:::
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS2.PNG){width=100%}
+:::
+
+---
+
+### Similarity Measures
+
+::: {style="font-size: 70%;"}
+  - **Jaccard Similarity** (co-occurrence-based):
+    $$
+    J(X, Y) = \frac{|X \cap Y|}{|X \cup Y|}
+    $$
+  - **Cosine Similarity** (vector-based):
+    $$
+    cos(\theta) =  \frac{X \cdot Y}{\|X\| \|Y\|} = \frac{\sum_{i=1}^n x_i y_i}{\sqrt{\sum_{i=1}^n x_i^2}\sqrt{\sum_{i=1}^n y_i^2}}
+    $$
+  - **Pearson Correlation** (not commonly used):
+    $$
+    r_{X Y}=\frac{n \sum x_{i} y_{i}-\sum x_{i} \sum y_{i}}{\sqrt{n \sum x_{i}^{2}-\left(\sum x_{i}\right)^{2}} \sqrt{n \sum y_{i}^{2}-\left(\sum y_{i}\right)^{2}}}
+    $$
+:::
+
+---
+
+### Similarity Measures: Example
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS3.PNG){width=95%}
+:::
+
+
+---
+
+### Similarity Measures: Exercise
+
+::: {style="font-size: 80%;"}
+**Question**:
+
+- Find the similarity between **Douglas and Maurizio**.
+- Find the similarity between **Johannes and Maurizio**.
+- What product(s) would you recommend Maurizio?
+:::
 
 
 
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS4.PNG){width=95%}
+:::
+
+---
+
+### Similarity Measures: Q1 Solution
+
+::: {style="font-size: 75%;"}
+**Q1**: Find similarity between **Douglas and Maurizio**.
+:::
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS4-1.PNG){width=90%}
+:::
 
 
+---
+
+### Similarity Measures: Q2 Solution
+
+::: {style="font-size: 75%;"}
+**Q2**: Find similarity between **Johannes and Maurizio**.
+:::
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS4-2.PNG){width=90%}
+:::
+
+---
+
+### Similarity Measures: Q3 Solution
+
+::: {style="font-size: 65%;"}
+**Question 3**: What product(s) would you recommend Maurizio?
+
+- **Recommendation Based on Similarity**:
+  - **Highest similarity** with **Douglas**.
+  - **Not previously acquired** products that **Douglas likes**: **MATLAB**.
+:::
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS4.PNG){width=95%}
+:::
+:::
+
+---
+
+### Similarity Measures: Q3+
+
+::: {style="font-size: 60%;"}
+**Question 3+**: What product(s) would you recommend Maurizio now?
+
+- **Highest similarity** with **Douglas and Tong**.
+- **Average rank of MATLAB**:
+  - **For Douglas**: Last **1 over 3** items; **For Tong**: **Top 3 over 5** items.
+  - **Average ranking**: Less than the middle.
+  - **Conclusion**: **No recommendation**.
+:::
 
 
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS5.PNG){width=75%}
+:::
+
+---
+
+### Other Actions: Cut-off
+
+::: {style="font-size: 70%;"}
+**Other actions to improve results**: 
+
+- **Rounding**, for example, **cut-off at 3**.
+:::
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS6.PNG){width=95%}
+:::
+
+
+---
+
+### Other Actions: Cut-off
+
+::: {style="font-size:70%;"}
+**Other actions to improve results**: 
+
+- **Rounding**, for example, **cut-off at 3**.
+:::
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS7.PNG){width=95%}
+:::
+
+---
+
+### Other Actions: Normalisation
+
+::: {style="font-size: 70%;"}
+**Other actions to improve results**: 
+
+- Subtract average of users' rating from all ratings
+- Turn low ranks into negative numbers and vice versa
+- Bigger difference in similarity scores
+
+:::
+
+
+::: {style="text-align: center; font-size: 60%;"}
+![](fig/RS8.PNG){width=95%}
+:::
+
+---
+
+### Other Approaches
+
+::: {style="font-size: 80%;"}
+- **Collaborative Filtering Alternatives**:
+  - **Other approaches**:
+    - **Cluster groups**.
+    - **Find people in social networks with similar interests**.
+      - Relationships indicate **relatedness**.
+      - Note that **collaborative filtering is already a form of this**.
+:::
+
+
+# Take Home Messages
+
+::: {style="font-size: 85%;"}
+Unsupervised Learning Tools in Social Network Analysis
+
+- Clustering
+- Frequent Itemset Analysis
+- Recommendation Systems
+:::
 
