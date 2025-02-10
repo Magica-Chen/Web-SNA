@@ -1,0 +1,378 @@
+---
+title: "Web and Social Network Analytics"
+subtitle: "Week 5: Ethics in Social Network Analytics"
+project: ../_quarto.yml
+author:
+  - name: Dr. Zexun Chen
+    orcid: 0000-0001-7883-8573
+    email: Zexun.Chen@ed.ac.uk
+format:
+  revealjs:
+    theme: sky
+    section-divs: false
+    title-slide-attributes:
+        data-state: "hide-menubar"
+    center: true
+    transition: slide
+    background-transition: fade
+    controls: true
+    slide-number: true
+    # controls-layout: bottom-right
+    chalkboard: true
+    menu: true
+    html:
+      embed-resources: true
+      self-contained-math: true
+    output-file: index.html
+    simplemenu:
+        flat: true
+        barhtml:
+            header: "<div class='menubar'><ul class='menu'></ul></div>"
+        scale: 0.5
+revealjs-plugins:
+  - simplemenu
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+date: "February 2025"
+date-format: "MMM-YYYY"  
+jupyter: python3
+
+---
+
+## Table of Contents {data-state="hide-menubar"}
+
+<ul class="menu"><ul>
+
+
+# GDPR {data-stack-name="GDPR"}
+
+## Question 1  
+
+What ethical responsibility do we have when gathering and using information, behavior patterns, and recommendation systems?
+
+
+---
+
+## Inequalities
+
+::: {style="font-size: 75%;"}
+- **Class/Economic gap**: [2020 UK exam results controversy](https://en.wikipedia.org/wiki/2020_UK_GCSE_and_A-Level_grading_controversy)
+- **Gender bias**: [Amazon's AI hiring tool](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G)
+- **Racial bias**: [Bias in healthcare recommendations](https://www.nature.com/articles/d41586-019-03228-6)
+- **LGBTQ+ discrimination**: [The risks of ‘outing’ people](https://en.wikipedia.org/wiki/Outing)
+- **Mental health concerns**: [Facebook's mood-manipulation studies](https://www.theatlantic.com/technology/archive/2014/06/everything-we-know-about-facebooks-secret-mood-manipulation-experiment/373648/)
+- **Political control**: Cambridge Analytica's influence on **Brexit** and **Trump election**.
+:::
+
+- What went wrong?
+- What can we do better next time?
+
+
+---
+
+## General Data Protection Regulation (GDPR)
+
+
+The [General Data Protection Regulation (GDPR)](https://gdpr-info.eu/) is an EU law governing data protection and privacy. It is a key component of **EU privacy law and human rights law** (Article 8, Charter of Fundamental Rights of the European Union).
+
+**Note**: The UK now follows [UK GDPR](https://ico.org.uk/for-organisations/data-protection-and-the-eu/data-protection-and-the-eu-in-detail/the-uk-gdpr/).
+
+
+
+---
+
+### GDPR Keypoints
+
+- **Privacy**
+- **Fairness**
+- **Transparency, accountability, explainability**
+
+---
+
+## Privacy
+
+::: {style="font-size: 85%;"}
+🔍 **Anonymized data can never be fully anonymous!**
+
+- **De Montjoye et al.** (2013)  
+  - **Finding**: Four spatio-temporal data points can uniquely identify **95% of individuals**.
+- **Li et al.** (2016)  
+  - **Finding**: Over **50% success rate** in **inferring age, gender, education** from **location data** in geo-social networks.
+
+:::
+
+
+---
+
+### Privacy-Preserving Techniques
+
+::: {style="font-size: 60%;"}
+✅ **Differential Privacy (DP)**  
+   - Adds **mathematical noise** to protect individual data points.  
+   - Example: Used by **Apple & Google** in analytics.
+
+✅ **Federated Learning (FL)**  
+   - **Decentralized AI training** → No raw data is shared.  
+   - Example: **Google’s Gboard** keyboard **learns from users locally**.
+
+✅ **Homomorphic Encryption (HE)**  
+   - AI can **process encrypted data without decrypting it**.  
+   - Example: Used in **healthcare AI for private medical analysis**.
+
+✅ **Synthetic Data**  
+   - AI-generated **artificial data** mimicking real datasets.  
+   - Example: **Amazon & NVIDIA** use it to train AI without privacy risks.
+
+✅ **Secure Multi-Party Computation (SMPC)**  
+   - Multiple parties **collaborate** to compute results without exposing private data.  
+   - Example: Used in **financial risk analysis**.
+
+:::
+
+---
+
+## Question 2: Trade-offs in Privacy & Convenience
+
+::: {style="font-size: 65%;"}
+What trade-offs are you willing to accept between **convenience and privacy**?
+
+**Examples of personal data sharing**:
+
+- **Purchase history** → Amazon recommendations
+- **Health & Activity** → Extra days off for Fitbit performance
+- **Economic status** → Airfare pricing based on affordability
+- **Banking history** → Discounts & recommendations
+- **Glassdoor** → Access to salary info in exchange for sharing your own
+- **Private conversations** → Facebook Messenger influencing Spotify recommendations
+:::
+
+
+
+---
+
+## Data Sharing Willingness
+
+![](fig/share.PNG){width=95%}
+
+---
+
+## Fairness in AI: Everything is Fine? 
+
+::: {.columns}
+::: {.column}
+![](fig/amazon.png){width=100%}
+:::
+
+
+::: {.column style="font-size: 75%;"}
+🔍 **Case Study**:  
+
+Amazon shut down its AI hiring tool after discovering **gender bias**, as the system penalized female candidates.
+:::
+
+:::
+---
+
+## Bias in AI Decision-Making
+
+::: {.columns}
+::: {.column}
+📌 **ProPublica Investigation**:  
+A recidivism risk scoring tool was **biased against African Americans**, leading to unjust sentencing disparities.
+:::
+
+::: {.column} 
+![](fig/pp_mb.png){width=100%}
+:::
+
+:::
+---
+
+## Algorithmic Bias: Where Does It Come From? 
+
+
+::: {.block}
+Bias comes from:
+$$
+Data + Model/Algorithm = Prediction (Decision)
+$$
+:::
+
+::: {.columns}
+::: {.column }
+![](fig/algorithmic-bias.png){width=65%}
+:::
+
+::: {.column}
+**Common bias sources**:
+
+- **Data bias**
+- **Algorithmic bias**
+:::
+:::
+
+
+
+---
+
+## What is Data Bias?
+
+::: {.block style="font-size: 75%;"}
+📌 **Data Bias** occurs when:
+
+- **Missing key attributes** that influence predictions.
+- **Human-generated content** contains biases.
+:::
+
+**Fact**:  
+Most datasets **are biased** unless generated from carefully controlled **randomized experiments**.
+
+---
+
+## Types of Data Biases
+
+::: {style="font-size: 70%;"}
+- **Response or Activity Bias**:  
+  - Biases from **reviews, social media posts, Wikipedia edits, etc.**  
+- **Selection Bias due to Feedback Loops**:  
+  - **Ads, content personalization, recommendations** reinforce bias.  
+- **Bias due to System Drift**:  
+  - Data generation processes change over time.  
+- **Omitted Variable Bias**:  
+  - Missing **critical attributes** affecting outcomes.  
+- **Societal Bias**:  
+  - **Social media & web content** reflect human biases.
+:::
+
+---
+
+## Can We Simply Ignore Biased Attributes in Modeling?
+
+❌ **NO!** 
+
+- Ignoring sensitive attributes like **gender & race** does **not** remove bias.
+- Such biases have already been embededing in other attributes
+
+---
+
+## How to Handle Data Bias?
+
+::: {style="font-size: 95%;"}
+⚖️ **Bias Mitigation Techniques** fall into three categories:  
+
+✅ **Pre-processing** (before training) → Modify data to **reduce bias**  
+✅ **In-processing** (during training) → Adjust models to **reduce discrimination**  
+✅ **Post-processing** (after training) → Adjust predictions to **ensure fairness**  
+:::
+
+---
+
+## Debiasing Techniques & Tools 
+
+---
+
+### **Pre-processing Approaches** (Fix biased data **before training**)  
+
+::: {style="font-size: 85%;"}
+🔹 **Re-sampling**: Adjust class distributions ([**SMOTE**](https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html) for imbalanced datasets)  
+🔹 **Re-weighting**: Assign weights to samples to balance representation  
+🔹 **Fair Representation Learning**: [**LFR (Learning Fair Representations)**](https://proceedings.mlr.press/v28/zemel13.html)  
+
+🛠 **Frameworks**:  
+✅ [**AI Fairness 360**](https://github.com/Trusted-AI/AIF360) 
+
+✅ [**Fairlearn**](https://fairlearn.org/)
+:::
+
+---
+
+### **In-processing Approaches** (Modify learning algorithms)  
+
+::: {style="font-size: 85%;"}
+🔹 **Adversarial Debiasing**: Train a second model to [**remove bias signals**](https://arxiv.org/abs/1801.07593)  
+🔹 **Fairness Constraints**: Use [**equalized odds**](https://arxiv.org/abs/1609.05807), [**demographic parity**](https://fairmlbook.org/classification.html)  
+🔹 **Differentially Private Training**: [**Protects individual data points**](https://github.com/tensorflow/privacy)  
+
+🛠 **Frameworks**:  
+✅ [**Fairness Indicators (TensorFlow Extended)**](https://www.tensorflow.org/responsible_ai/fairness_indicators/guide)  
+✅ [**AIF360 Adversarial Debiasing Models**](https://github.com/Trusted-AI/AIF360)  
+:::
+
+---
+
+### **Post-processing Approaches** (Correct biased outputs)  
+
+::: {style="font-size: 85%;"}
+🔹 **Equalized Odds Post-processing**: Adjusts predictions for **equal fairness across groups** ([**More Info**](https://arxiv.org/abs/1609.05807))  
+🔹 **Calibrated Equalized Odds**: Ensures fairness **without sacrificing accuracy**  
+🔹 **Reject Option-Based Fairness**: Tweaks **uncertain predictions** ([**More Info**](https://github.com/IBM/AIF360/blob/master/examples/demo_reject_option_classification.ipynb))  
+
+🛠 **Frameworks**:  
+✅ [**Fairlearn– Post-processing Tools**](https://fairlearn.org/)  
+✅ [**AIF 360– Post-processing Fairness Algorithms**](https://github.com/Trusted-AI/AIF360) 
+:::
+
+
+# EU AI Act {data-stack-name="EU AI Act"}
+
+## EU AI Act: The First AI Regulation
+
+::: {.block style="font-size: 90%;"}
+The [EU AI Act](https://www.europarl.europa.eu/topics/en/article/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence) is the world’s **first legal framework** regulating AI, focusing on **risk-based classification and accountability**.
+:::
+
+---
+
+## Key Provisions of the EU AI Act
+
+::: {style="font-size: 70%;"}
+- **Risk-Based Classification**:
+  - **Unacceptable Risk** 🚨 → **Banned AI** (e.g., mass surveillance, social scoring).
+  - **High Risk** ⚠️ → Strict regulations (e.g., AI in hiring, healthcare, law enforcement).
+  - **Limited Risk** ⚖️ → Transparency required (e.g., AI-generated content).
+  - **Minimal Risk** ✅ → No restrictions (e.g., AI chatbots, video games).
+
+- **Accountability & Transparency**:
+  - **AI providers must ensure compliance** with **fairness, privacy, and transparency**.
+  - **Strict penalties** for non-compliance (up to **€35M or 7% of annual turnover**).
+:::
+
+
+---
+
+## How Does the EU AI Act Impact AI Development?
+
+::: {style="font-size: 75%;"}
+- AI companies must **conduct risk assessments** before deployment.
+- Increased **regulatory oversight** over **high-risk AI applications**.
+- Stronger **protection for individuals** against **biased AI systems**.
+:::
+
+---
+
+## EU AI Act vs GDPR: What's the Difference?
+
+
+
+✅ **GDPR** → **Protects personal data & privacy**  
+✅ **EU AI Act** → **Regulates AI models & their risks**  
+
+
+
+
+---
+
+## Conclusion: Ethics & AI  
+
+::: {style="font-size: 90%;"}
+- **Ethical AI & fairness** should be a core consideration in **social network analysis**.
+- **Transparency, accountability, and explainability** are crucial for **trustworthy AI**.
+- **Techniques for mitigating bias exist** but require **intentional application**.
+:::
+
+
+
+
